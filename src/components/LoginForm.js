@@ -15,18 +15,33 @@ class LoginForm extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  componentWillReceiveProps(props) {
+    if (props.validAdmin === false) {
+      this.setState({ show: 'Invalid Email or Password' });
+    }
+    if (props.validAdmin === true) {
+      this.setState({ show: 'Welcome '+this.state.name });
+    }
+  }
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
   onSubmit(event) {
-    this.setState({ show: 'Logging in....' });
     event.preventDefault();
-    this.props.submitForm({
-      name: this.state.name,
-      password: this.state.password,
-    });
+    if(this.state.name===''||this.state.password==='')
+            this.setState({ show: 'Name or Password cannot be Blank' });
+    else if(this.state.name.length<3)
+             this.setState({ show: 'Name must have mimimum 3 characters' });
+    else if (this.state.password.length<3)
+             this.setState({ show: 'Password must have mimimum 3 characters' });
+    else
+    {      
+        this.props.submitForm({
+          name: this.state.name,
+          password: this.state.password,
+        });
+    }
   }
-
   render() {
     return (
       <div>
@@ -36,7 +51,7 @@ class LoginForm extends Component {
             <label>Name : </label>
             <input name="name" type="text" onChange={this.onChange} value={this.state.name} /><br /><br />
             <label>Password : </label>
-            <input name="password" type="text" onChange={this.onChange} value={this.state.password} />
+            <input name="password" type="password" onChange={this.onChange} value={this.state.password} />
           </div><br /><br />
           <button type="submit" onSubmit={this.onSubmit}>Login</button>
         </form>
@@ -47,8 +62,14 @@ class LoginForm extends Component {
 
 
 LoginForm.propTypes = {
-  submitForm: PropTypes.func.isRequired
+  submitForm: PropTypes.func.isRequired,
+  validAdmin: PropTypes.bool
 };
+
+const mapStateToProps = state => ({
+  validAdmin: state.temp.isAuthentic
+});
+
 function mapDispatchToProps(dispatch) {
   return {
     submitForm: details => dispatch(submitForm(details))
@@ -56,4 +77,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

@@ -1,9 +1,9 @@
 import { login } from './types';
 
-export const submitForm = (formName, formPassword) => (dispatch) => {
+export const submitForm = (form) => (dispatch) => {
   const post = {
-    name: formName.name,
-    password: formName.password
+    name: form.name,
+    password: form.password
   };
   fetch('http://localhost:4000/admin', {
     method: 'post',
@@ -12,9 +12,17 @@ export const submitForm = (formName, formPassword) => (dispatch) => {
     },
     body: JSON.stringify(post)
   }).then(res => res.json())
-    .then(data =>
-      dispatch({
-        type: login,
-        result: data.results
-      }));
+    .then((data) => {
+      if (data.results === 'Not Valid Admin Credentials') {
+        dispatch({
+          type: login,
+          result: undefined
+        });
+      } else {
+        dispatch({
+          type: login,
+          result: data.results
+        });
+      }
+    });
 };

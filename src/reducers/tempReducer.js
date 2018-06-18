@@ -1,9 +1,10 @@
 import { fetchAuthor, login } from '../actions/types';
 
 const initialState = {
-  items: [],
+  items: '',
   formName: '',
-  formPass: ''
+  formPass: '',
+  isAuthentic  :false 
 };
 
 export default function (state = initialState, action) {
@@ -14,11 +15,19 @@ export default function (state = initialState, action) {
         items: action.result
       };
     case login:
+      if(action.result!==undefined)
       return {
         ...state,
         formName: action.result.name,
-        formPass: action.result.password
+        formPass: action.result.password,
+        isAuthentic : true
       };
+      else
+        return {
+        ...state,
+        isAuthentic : false
+      };
+
     default: return state;
   }
 }
