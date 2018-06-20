@@ -1,10 +1,19 @@
-import { fetchAuthor, login } from '../actions/types';
+import jwt from 'jsonwebtoken';
+import { fetchAuthor, login, checkToken } from '../actions/types';
 
 const initialState = {
   items: '',
   formName: '',
   formPass: '',
   isAuthentic: false
+};
+const tokenIsVaild = (token, currentTime) => {
+  if (token) {
+    const decoded = jwt.decode(token);
+    const isValid = decoded.exp > currentTime;
+    return isValid;
+  }
+  return false;
 };
 
 export default function (state = initialState, action) {
@@ -23,12 +32,22 @@ export default function (state = initialState, action) {
           isAuthentic: true
         };
       }
-      else {
-        return {
-          ...state,
-          isAuthentic: false
-        };
-      }
+
+      return {
+        ...state,
+        isAuthentic: false
+      };
+
+    case checkToken:
+    {
+      const { token, currentTime } = action.result;
+      const validToken = tokenIsVaild(token, currentTime);
+      return {
+        ...state,
+        isAuthentic: validToken
+      };
+    }
+
     default: return state;
   }
 }

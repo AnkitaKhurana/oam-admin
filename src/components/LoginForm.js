@@ -17,7 +17,7 @@ class LoginForm extends Component {
   }
   componentWillReceiveProps(props) {
     if (props.validAdmin === false) {
-      this.setState({ show: 'Invalid Email or Password' });
+      this.setState({ show: 'Invalid Username or Password' });
     }
     if (props.validAdmin === true) {
       this.setState({ show: `Welcome ${this.state.name}` });
@@ -28,11 +28,19 @@ class LoginForm extends Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    if (this.state.name === '' || this.state.password === '') { this.setState({ show: 'Name or Password cannot be Blank' }); } else if (this.state.name.length < 3) { this.setState({ show: 'Name must have mimimum 3 characters' }); } else if (this.state.password.length < 3) { this.setState({ show: 'Password must have mimimum 3 characters' }); } else {
+    if (this.state.name === '' || this.state.password === '') {
+      this.setState({ show: 'Name or Password cannot be Blank' });
+    } else if (this.state.name.length < 3) { this.setState({ show: 'Name must have mimimum 3 characters' }); } else if (this.state.password.length < 3) { this.setState({ show: 'Password must have mimimum 3 characters' }); } else {
       this.props.submitForm({
         name: this.state.name,
         password: this.state.password,
       });
+      if (this.props.validAdmin === false) {
+        this.setState({ show: 'Invalid Username or Password' });
+      }
+      if (this.props.validAdmin === true) {
+        this.setState({ show: `Welcome ${this.state.name}` });
+      }
     }
   }
   render() {
@@ -56,7 +64,7 @@ class LoginForm extends Component {
 
 LoginForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
-  validAdmin: PropTypes.bool
+  validAdmin: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
