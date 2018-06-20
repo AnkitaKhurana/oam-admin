@@ -1,4 +1,5 @@
 import { login } from './types';
+import { setToken } from '../utils/token';
 
 export const submitForm = (form) => (dispatch) => {
   const post = {
@@ -19,6 +20,7 @@ export const submitForm = (form) => (dispatch) => {
           result: undefined
         });
       } else {
+        setToken(data.results.token);
         dispatch({
           type: login,
           result: data.results

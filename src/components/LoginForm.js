@@ -20,7 +20,7 @@ class LoginForm extends Component {
       this.setState({ show: 'Invalid Email or Password' });
     }
     if (props.validAdmin === true) {
-      this.setState({ show: 'Welcome '+this.state.name });
+      this.setState({ show: `Welcome ${this.state.name}` });
     }
   }
   onChange(event) {
@@ -28,18 +28,11 @@ class LoginForm extends Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    if(this.state.name===''||this.state.password==='')
-            this.setState({ show: 'Name or Password cannot be Blank' });
-    else if(this.state.name.length<3)
-             this.setState({ show: 'Name must have mimimum 3 characters' });
-    else if (this.state.password.length<3)
-             this.setState({ show: 'Password must have mimimum 3 characters' });
-    else
-    {      
-        this.props.submitForm({
-          name: this.state.name,
-          password: this.state.password,
-        });
+    if (this.state.name === '' || this.state.password === '') { this.setState({ show: 'Name or Password cannot be Blank' }); } else if (this.state.name.length < 3) { this.setState({ show: 'Name must have mimimum 3 characters' }); } else if (this.state.password.length < 3) { this.setState({ show: 'Password must have mimimum 3 characters' }); } else {
+      this.props.submitForm({
+        name: this.state.name,
+        password: this.state.password,
+      });
     }
   }
   render() {
