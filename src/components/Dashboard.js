@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Title from './Title';
 import LoginForm from './LoginForm';
+import LoggedIn from './LoggedIn';
 import { tokenIsValid } from '../actions/checkToken';
 import { getToken } from '../utils/token';
 
@@ -19,9 +21,8 @@ class Dashboard extends Component {
     if (this.props.isAuthentic === false) {
       screen = (<LoginForm />);
     } else {
-      screen = (<p>Hi Admin</p>);
+      screen = (<LoggedIn />);
     }
-
 
     return (
       <div>
@@ -32,7 +33,6 @@ class Dashboard extends Component {
           Admin Login
         </p>
         {screen}
-
       </div>
     );
   }
@@ -48,5 +48,12 @@ const mapStateToProps = state => ({
   isAuthentic: state.temp.isAuthentic
 });
 
-export default connect(mapStateToProps, { tokenIsValid })(Dashboard);
+function mapDispatchToProps(dispatch) {
+  return {
+    ...bindActionCreators({ tokenIsValid }, dispatch)
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 

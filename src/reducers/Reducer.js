@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { fetchAuthor, login, checkToken } from '../actions/types';
+import { fetchAuthor, login, checkToken, logout } from '../actions/types';
 
 const initialState = {
   items: '',
@@ -45,6 +45,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isAuthentic: validToken
+      };
+    }
+
+    case logout:
+    {
+      return {
+        ...state,
+        isAuthentic: false
       };
     }
 
