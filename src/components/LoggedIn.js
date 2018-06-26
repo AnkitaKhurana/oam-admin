@@ -16,7 +16,7 @@ class Screen extends Component {
   render() {
     return (
       <div>
-        <p>Hi Admin</p>
+        <p>Hi </p>
         <button onClick={this.onSubmit}>Logout</button>
       </div>
     );

@@ -7,7 +7,7 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      email: '',
       password: '',
       show: ''
 
@@ -17,10 +17,10 @@ class LoginForm extends Component {
   }
   componentWillReceiveProps(props) {
     if (props.validAdmin === false) {
-      this.setState({ show: 'Invalid Username or Password' });
+      this.setState({ show: 'Invalid Email or Password' });
     }
     if (props.validAdmin === true) {
-      this.setState({ show: `Welcome ${this.state.name}` });
+      this.setState({ show: `Welcome ${this.state.email}` });
     }
   }
   onChange(event) {
@@ -28,18 +28,18 @@ class LoginForm extends Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    if (this.state.name === '' || this.state.password === '') {
-      this.setState({ show: 'Name or Password cannot be Blank' });
-    } else if (this.state.name.length < 3) { this.setState({ show: 'Name must have mimimum 3 characters' }); } else if (this.state.password.length < 3) { this.setState({ show: 'Password must have mimimum 3 characters' }); } else {
+    if (this.state.email === '' || this.state.password === '') {
+      this.setState({ show: 'Email or Password cannot be Blank' });
+    } else if (this.state.email.length < 3) { this.setState({ show: 'Email must have mimimum 3 characters' }); } else if (this.state.password.length < 3) { this.setState({ show: 'Password must have mimimum 3 characters' }); } else {
       this.props.submitForm({
-        name: this.state.name,
+        email: this.state.email,
         password: this.state.password,
       });
       if (this.props.validAdmin === false) {
-        this.setState({ show: 'Invalid Username or Password' });
+        this.setState({ show: 'Invalid Email or Password' });
       }
       if (this.props.validAdmin === true) {
-        this.setState({ show: `Welcome ${this.state.name}` });
+        this.setState({ show: `Welcome ${this.state.email}` });
       }
     }
   }
@@ -49,8 +49,8 @@ class LoginForm extends Component {
         <p>{this.state.show}</p>
         <form onSubmit={this.onSubmit}>
           <div>
-            <label>Name : </label>
-            <input name="name" type="text" onChange={this.onChange} value={this.state.name} /><br /><br />
+            <label>Email : </label>
+            <input name="email" type="email" onChange={this.onChange} value={this.state.email} /><br /><br />
             <label>Password : </label>
             <input name="password" type="password" onChange={this.onChange} value={this.state.password} />
           </div><br /><br />
@@ -64,7 +64,7 @@ class LoginForm extends Component {
 
 LoginForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
-  validAdmin: PropTypes.bool,
+  validAdmin: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
