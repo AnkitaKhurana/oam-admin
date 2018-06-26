@@ -1,7 +1,7 @@
 import { fetchAuthor } from './types';
 
 export const fetchNow = () => (dispatch) => {
-  fetch('http://localhost:4000')
+  fetch(process.env.REACT_APP_API_URL + '/')
     .then(res => res.json())
     .then(data => dispatch({
       type: fetchAuthor,
