@@ -19,19 +19,21 @@ class Dashboard extends Component {
   render() {
     let screen;
     if (this.props.isAuthentic === false) {
-      screen = (<LoginForm />);
+      screen = (<div>
+        <header className="App-header">
+          <Title className="App-title" />
+        </header>
+        <br/>
+        <LoginForm />
+      </div>
+      );
     } else {
       screen = (<LoggedIn />);
     }
 
     return (
+
       <div>
-        <header className="App-header">
-          <Title className="App-title" />
-        </header>
-        <p className="App-intro">
-          Admin Login
-        </p>
         {screen}
       </div>
     );
