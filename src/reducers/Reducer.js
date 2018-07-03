@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { fetchAuthor, login, checkToken, logout } from '../actions/types';
+import { callApi, fetchAuthor, login, checkToken, logout } from '../actions/types';
 
 const initialState = {
   items: '',
@@ -16,6 +16,11 @@ const tokenIsVaild = (token, currentTime) => {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case callApi:
+      return {
+        ...state,
+        isAuthentic: action.isAuthentic
+      };
     case fetchAuthor:
       return {
         ...state,

@@ -1,10 +1,9 @@
 import { fetchAuthor } from './types';
 
-export const fetchNow = () => (dispatch) => {
-  fetch(process.env.REACT_APP_API_URL + '/')
-    .then(res => res.json())
-    .then(data => dispatch({
-      type: fetchAuthor,
-      result: data.meta.provided_by
-    }));
-};
+export function fetchNow() {
+  return {
+    type: fetchAuthor,
+    endpoint: '/',
+    method: 'get',
+  };
+}

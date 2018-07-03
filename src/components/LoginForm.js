@@ -19,9 +19,6 @@ class LoginForm extends Component {
     if (props.validAdmin === false) {
       this.setState({ show: 'Invalid Email or Password' });
     }
-    if (props.validAdmin === true) {
-      this.setState({ show: `Welcome ${this.state.email}` });
-    }
   }
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -37,9 +34,6 @@ class LoginForm extends Component {
       });
       if (this.props.validAdmin === false) {
         this.setState({ show: 'Invalid Email or Password' });
-      }
-      if (this.props.validAdmin === true) {
-        this.setState({ show: `Welcome ${this.state.email}` });
       }
     }
   }

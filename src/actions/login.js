@@ -1,32 +1,15 @@
-import { login } from './types';
-import { setToken } from '../utils/token';
-require('dotenv').config()
+import { callApi } from './types';
 
-
-export const submitForm = form => (dispatch) => {
+export function submitForm(form) {
   const post = {
     email: form.email,
     password: form.password
   };
-  fetch(process.env.REACT_APP_API_URL + '/createToken', {
+  return {
+    type: callApi,
+    endpoint: '/createToken',
     method: 'post',
-    header: {
-      'constent-type': 'application/json'
-    },
-    body: JSON.stringify(post)
-  }).then(res => res.json())
-    .then((data) => {
-      if (data.statusCode === 400) {
-        dispatch({
-          type: login,
-          result: undefined
-        });
-      } else {
-        setToken(data.token);
-        dispatch({
-          type: login,
-          result: data
-        });
-      }
-    });
-};
+    json : post
+  };
+}
+
