@@ -9,7 +9,7 @@ export function submitForm(form) {
     type: callApi,
     endpoint: '/createToken',
     method: 'post',
-    json : post
+    json: post
   };
 }
 
