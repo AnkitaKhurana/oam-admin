@@ -1,8 +1,13 @@
 import test from 'tape';
+import { applyMiddleware } from 'redux';
+
 // import sinon from 'sinon';
 import reducer from '../src/reducers/index';
-import { checkToken } from '../src/actions/types';
-import  { tokenIsValid }  from '../src/actions/checkToken';
+import { checkToken, callApi, fetchAuthor } from '../src/actions/types';
+import { tokenIsValid } from '../src/actions/checkToken';
+import { submitForm } from '../src/actions/login';
+import { fetchNow } from '../src/actions/oam';
+import Apimiddleware from '../src/store/middleware';
 
 const redux = require('redux');
 const tempTokenValid = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lQGdtYWlsLmNvbSIsInNjb3BlIjoiYWRtaW4iLCJpYXQiOjE1Mjk3NzM1NzEsImV4cCI6MTY4NzU2MTU3MX0.ZywZaau_67h1ZuhAnEeTMPUOQrM45JUyuoPOa9S_dkg';
@@ -60,5 +65,22 @@ test('checkToken Action should create an action to check token', (t) => {
   };
   const message = 'checkToken creates an action to check token';
   t.deepEqual(tokenIsValid(tempTokenValid, currentTime).type, expectedAction.type, message);
+  t.end();
+});
+
+
+test('login Action should create an action of type callApi', (t) => {
+  const form = {
+    email: 'test@test.com',
+    password: 'test'
+  };
+  const expectedAction = {
+    type: callApi,
+    endpoint: '/createToken',
+    method: 'post',
+    json: form
+  };
+  const message = 'callApi action called';
+  t.deepEqual(submitForm(form).type, expectedAction.type, message);
   t.end();
 });
