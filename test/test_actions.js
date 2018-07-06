@@ -84,3 +84,14 @@ test('login Action should create an action of type callApi', (t) => {
   t.deepEqual(submitForm(form).type, expectedAction.type, message);
   t.end();
 });
+
+test('oam action should create an action of type fetchAuthor', (t) => {
+  const expectedAction = {
+    type: fetchAuthor,
+    endpoint: '/',
+    method: 'get'
+  };
+  const message = 'fetchAuthor action called';
+  t.deepEqual(fetchNow().type, expectedAction.type, message);
+  t.end();
+});
