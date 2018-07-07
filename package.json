@@ -14,7 +14,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "test": "NODE_ENV=development && BABEL_ENV=test react-scripts test ",
+    "test": "BABEL_ENV=test ./node_modules/.bin/tape -r babel-register ./test/test.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
@@ -34,7 +34,6 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1",
     "sinon": "^6.1.0",
-    "sinon-stub-promise": "^4.0.0",
     "tape": "^4.9.1"
   }
 }

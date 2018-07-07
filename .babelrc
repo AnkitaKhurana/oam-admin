@@ -1,5 +1,5 @@
 {
-  "presets": ["es2015", "react"],
+  "presets": ["react-app"],
    "env": {
        "test": {
            "plugins": ["rewire"]
