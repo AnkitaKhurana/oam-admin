@@ -3,7 +3,7 @@ import { clearToken } from '../utils/token';
 
 export const logoutAdmin = () => (dispatch) => {
   clearToken();
-  dispatch({
+  return({
     type: logout,
     result: false
   });
