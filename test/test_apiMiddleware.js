@@ -1,15 +1,17 @@
 /* eslint no-underscore-dangle: "off" */
 import test from 'tape';
 import sinon from 'sinon';
-import apiMiddleware, { callApi } from '../src/store/apiMiddleware';
+import apiMiddleware from '../src/store/apiMiddleware';
 
 
 const testAction = {
   type: 'CALL_API',
-  endpoint: '',
-  authenticated: true,
-  types: ['FETCH_AUTHOR', 'FETCH_AUTHOR_SUCCEEDED', 'FETCH_AUTHOR_FAILED'],
-  method: 'GET'
+  payload: {
+    endpoint: '',
+    authenticated: true,
+    types: ['FETCH_AUTHOR', 'FETCH_AUTHOR_SUCCEEDED', 'FETCH_AUTHOR_FAILED'],
+    method: 'GET'
+  }
 };
 
 const setup = () => {
@@ -65,23 +67,25 @@ test('apiMiddleware', (t) => {
   } = setup();
 
   apiMiddleware.__Rewire__('getToken', getTokenStub);
-  const response = 'response';
+  const results = 'results';
+  const response = JSON.stringify({ results });
   callApiStub.resolves(response);
   apiMiddleware.__Rewire__('callApi', callApiStub);
+
   apiMiddleware(store)(nextSpy)(testAction);
-  const { endpoint, method, json } = testAction;
+  const { endpoint, method, json } = testAction.payload;
   t.ok(
     callApiStub.calledWithExactly(endpoint, method, token, json),
     'Calls the callApi function with proper arguments'
   );
   callApiStub().then(() => {
     t.equal(
-      nextSpy.firstCall.args[0].response, response,
+      nextSpy.firstCall.args[0].payload.json.results, results,
       'Calls next function with callApi response when succesful'
     );
     t.equal(
       nextSpy.firstCall.args[0].type,
-      testAction.types[1],
+      testAction.payload.types[1],
       'Calls next function with success action type when succesful'
     );
     t.end();
@@ -104,7 +108,7 @@ test('apiMiddleware', (t) => {
   apiMiddleware(store)(nextSpy)(testAction);
   callApiStub().then().catch(() => {
     t.equal(nextSpy.firstCall.args[0].error, reject.message);
-    t.equal(nextSpy.firstCall.args[0].type, testAction.types[2]);
+    t.equal(nextSpy.firstCall.args[0].type, testAction.payload.types[2]);
     t.end();
   });
 });

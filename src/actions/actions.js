@@ -34,3 +34,7 @@ export function fetchAuthor() {
 export function tokenExpired() {
   return { type: 'TOKEN_EXPIRED' };
 }
+
+export function tokenValidated() {
+  return { type: 'TOKEN_VALIDATED' };
+}

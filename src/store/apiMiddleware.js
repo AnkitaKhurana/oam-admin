@@ -22,7 +22,8 @@ function callApi(endpoint, method, token, json) {
         .then(text => ({ text, response })))
     .then(({ text, response }) => {
       if (!response.ok) {
-        return Promise.reject(text);
+        const error = new Error(response.statusText);
+        return Promise.reject(error);
       }
       return text;
     })
@@ -39,15 +40,21 @@ const apiMiddleware = store => next => (action) => {
     authenticated,
     method,
     json
-  } = action;
+  } = action.payload;
 
   const [requestType, successType, errorType] = types;
 
-  const handleResponse = response => next({
-    response,
-    authenticated,
-    type: successType
-  });
+  const handleResponse = (response) => {
+    const responseJSON = JSON.parse(response);
+    return next({
+      payload: {
+        json: responseJSON,
+        authenticated,
+      },
+      type: successType
+    });
+  };
+
   const handleErrorResponse = error => next({
     error: error.message || 'There was an error.',
     type: errorType
