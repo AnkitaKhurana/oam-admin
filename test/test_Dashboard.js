@@ -5,6 +5,7 @@ import test from 'tape';
 import sinon from 'sinon';
 import { Dashboard } from '../src/components/Dashboard';
 import LoginForm from '../src/components/LoginForm';
+import LogoutButton from '../src/components/LogoutButton';
 
 configure({ adapter: new Adapter() });
 
@@ -16,6 +17,7 @@ test('Dashboard', (t) => {
   const getToken = sinon.stub().returns(null);
   const fetchAuthor = sinon.stub();
   const author = 'Author';
+  const logout = sinon.stub();
   shallow((
     <Dashboard
       authenticated={authenticated}
@@ -25,6 +27,7 @@ test('Dashboard', (t) => {
       getToken={getToken}
       fetchAuthor={fetchAuthor}
       author={author}
+      logout={logout}
     />
   ));
   t.ok(getToken.calledOnce, 'Calls getToken when mounting');
@@ -40,6 +43,7 @@ test('Dashboard', (t) => {
   const getToken = sinon.stub().returns('token');
   const fetchAuthor = sinon.stub();
   const author = 'Author';
+  const logout = sinon.stub();
   shallow((
     <Dashboard
       authenticated={authenticated}
@@ -49,6 +53,7 @@ test('Dashboard', (t) => {
       getToken={getToken}
       fetchAuthor={fetchAuthor}
       author={author}
+      logout={logout}
     />
   ));
   t.ok(getToken.calledOnce, 'Calls getToken when mounting');
@@ -64,6 +69,7 @@ test('Dashboard', (t) => {
   const getToken = sinon.stub().returns(null);
   const fetchAuthor = sinon.stub();
   const author = 'Author';
+  const logout = sinon.stub();
   const wrapper = shallow((
     <Dashboard
       authenticated={authenticated}
@@ -73,6 +79,7 @@ test('Dashboard', (t) => {
       getToken={getToken}
       fetchAuthor={fetchAuthor}
       author={author}
+      logout={logout}
     />
   ));
   t.equal(
@@ -90,6 +97,7 @@ test('Dashboard', (t) => {
   const getToken = sinon.stub().returns(null);
   const fetchAuthor = sinon.stub();
   const author = 'Author';
+  const logout = sinon.stub();
   const wrapper = shallow((
     <Dashboard
       authenticated={authenticated}
@@ -99,11 +107,12 @@ test('Dashboard', (t) => {
       getToken={getToken}
       fetchAuthor={fetchAuthor}
       author={author}
+      logout={logout}
     />
   ));
-  t.ok(
-    wrapper.contains(<div>Authenticated</div>),
-    'Displays authenticated content when authenticated is true'
+  t.equal(
+    wrapper.find(LogoutButton).length, 1,
+    'Displays Logout option when authenticated is true'
   );
   t.end();
 });

@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Title from './Title';
 import LoginForm from './LoginForm';
+import LogoutButton from './LogoutButton';
 // import LoggedIn from './LoggedIn';
 import { getToken } from '../utils/token';
-import { login, tokenExpired, tokenValidated, fetchAuthor }
+import { login, tokenExpired, tokenValidated, fetchAuthor,logout }
   from '../actions/actions';
 
 export class Dashboard extends Component {
@@ -34,7 +35,7 @@ export class Dashboard extends Component {
     if (this.props.authenticated === false) {
       authenticatedContent = <LoginForm login={this.props.login} />;
     } else {
-      authenticatedContent = <div>Authenticated</div>;
+      authenticatedContent = <div>Authenticated<LogoutButton logout={this.props.logout}/></div>;
     }
     return (
       <div>
@@ -56,7 +57,8 @@ Dashboard.propTypes = {
   login: PropTypes.func.isRequired,
   getToken: PropTypes.func.isRequired,
   fetchAuthor: PropTypes.func.isRequired,
-  author: PropTypes.string.isRequired
+  author: PropTypes.string.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -69,7 +71,8 @@ const mapDispatchToProps = {
   login,
   tokenExpired,
   tokenValidated,
-  fetchAuthor
+  fetchAuthor,
+  logout
 };
 
 

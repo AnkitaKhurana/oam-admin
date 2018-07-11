@@ -31,6 +31,10 @@ export function fetchAuthor() {
   };
 }
 
+export function logout() {
+  return { type: 'LOGOUT' };
+}
+
 export function tokenExpired() {
   return { type: 'TOKEN_EXPIRED' };
 }

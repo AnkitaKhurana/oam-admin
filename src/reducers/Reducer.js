@@ -35,6 +35,12 @@ export default function (state = initialState, action) {
         author: ''
       };
 
+    case 'LOGOUT_SUCCEEDED':
+      return {
+        ...state,
+        authenticated: false
+      };
+
     default: return state;
   }
 }
