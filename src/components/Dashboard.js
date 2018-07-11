@@ -1,40 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import Title from './Title';
+//import Title from './Title';
 import LoginForm from './LoginForm';
-import LoggedIn from './LoggedIn';
-import { tokenIsValid } from '../actions/checkToken';
+//import LoggedIn from './LoggedIn';
 import { getToken } from '../utils/token';
+import { login, tokenExpired, tokenValidated, fetchAuthor }
+  from '../actions/actions';
 
-
-const currentTime = new Date().getTime() / 1000;
-
-class Dashboard extends Component {
+export class Dashboard extends Component {
   componentWillMount() {
-    const token = getToken();
-    this.props.tokenIsValid(token, currentTime);
+    const token = this.props.getToken();
+    if (token) {
+      this.props.tokenValidated();
+    } else {
+      this.props.tokenExpired();
+    }
   }
   render() {
-    let screen;
-    if (this.props.isAuthentic === false) {
-      screen = (<div>
-        <header className="App-header">
-          <Title className="App-title" />
-        </header>
-        <br/>
-        <LoginForm />
-      </div>
-      );
+    let authenticatedContent;
+    if (this.props.authenticated === false) {
+      authenticatedContent = <LoginForm login={this.props.login} />;
     } else {
-      screen = (<LoggedIn />);
+      authenticatedContent = <div>Authenticated</div>;
     }
-
     return (
-
       <div>
-        {screen}
+        <header className="App-header">
+          <div>Title</div>
+        </header>
+        <br />
+        {authenticatedContent}
       </div>
     );
   }
@@ -42,19 +38,24 @@ class Dashboard extends Component {
 
 
 Dashboard.propTypes = {
-  isAuthentic: PropTypes.bool.isRequired,
-  tokenIsValid: PropTypes.func.isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  tokenExpired: PropTypes.func.isRequired,
+  tokenValidated: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  getToken: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  isAuthentic: state.temp.isAuthentic
+  authenticated: state.admin.authenticated,
+  getToken
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    ...bindActionCreators({ tokenIsValid }, dispatch)
-  };
-}
+const mapDispatchToProps = {
+  login,
+  tokenExpired,
+  tokenValidated,
+  fetchAuthor
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

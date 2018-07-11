@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import Reducer from './Reducer';
+import reducer from './Reducer';
 
 export default combineReducers({
-  temp: Reducer
+  admin: reducer
 });

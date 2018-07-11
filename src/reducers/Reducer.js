@@ -1,54 +1,33 @@
-import jwt from 'jsonwebtoken';
-import { fetchAuthor, login, checkToken, logout } from '../actions/types';
-
 const initialState = {
-  items: '',
-  isAuthentic: false
-};
-const tokenIsVaild = (token, currentTime) => {
-  if (token && token !== 'undefined') {
-    const decoded = jwt.decode(token);
-    const isValid = decoded.exp > currentTime;
-    return isValid;
-  }
-  return false;
+  author: null,
+  authenticated: false
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case fetchAuthor:
+    case 'LOGIN_SUCCEEDED':
       return {
         ...state,
-        items: action.result
-      };
-    case login:
-      if (action.result !== undefined) {
-        return {
-          ...state,
-          isAuthentic: true
-        };
-      }
-
-      return {
-        ...state,
-        isAuthentic: false
+        authenticated: true
       };
 
-    case checkToken:
-    {
-      const { token, currentTime } = action.result;
-      const validToken = tokenIsVaild(token, currentTime);
+    case 'TOKEN_EXPIRED':
       return {
         ...state,
-        isAuthentic: validToken
+        authenticated: false
       };
-    }
 
-    case logout:
-    {
+    case 'TOKEN_VALIDATED':
       return {
         ...state,
-        isAuthentic: false
+        authenticated: true
+      };
+
+    case 'FETCH_AUTHOR_SUCCEEDED': {
+      const author = action.payload.json.data.meta.provided_by;
+      return {
+        ...state,
+        author
       };
     }
 
