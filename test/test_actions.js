@@ -10,7 +10,7 @@ test('login', (t) => {
   };
   const action = login(formData);
   t.equal(action.type, 'CALL_API');
-  t.equal(action.payload.endpoint, 'createToken');
+  t.equal(action.payload.endpoint, '/createToken');
   t.false(action.payload.authenticated);
   t.equal(action.payload.types[0], 'LOGIN');
   t.equal(action.payload.types[1], 'LOGIN_SUCCEEDED');
