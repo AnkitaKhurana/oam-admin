@@ -24,7 +24,7 @@ test('fetchAuthor', (t) => {
   const action = fetchAuthor();
   t.equal(action.type, 'CALL_API');
   t.equal(action.payload.endpoint, '');
-  t.true(action.payload.authenticated);
+  t.false(action.payload.authenticated);
   t.equal(action.payload.types[0], 'FETCH_AUTHOR');
   t.equal(action.payload.types[1], 'FETCH_AUTHOR_SUCCEEDED');
   t.equal(action.payload.types[2], 'FETCH_AUTHOR_FAILED');
