@@ -62,7 +62,7 @@ Dashboard.propTypes = {
 const mapStateToProps = state => ({
   authenticated: state.admin.authenticated,
   getToken,
-  author: state.admin.author,
+  author: state.admin.author
 });
 
 const mapDispatchToProps = {

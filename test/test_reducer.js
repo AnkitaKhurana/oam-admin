@@ -26,10 +26,8 @@ test('reducer', (t) => {
     type: 'FETCH_AUTHOR_SUCCEEDED',
     payload: {
       json: {
-        data: {
-          meta: {
-            provided_by: author
-          }
+        meta: {
+          provided_by: author
         }
       }
     }

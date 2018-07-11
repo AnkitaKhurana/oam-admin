@@ -14,6 +14,8 @@ test('Dashboard', (t) => {
   const tokenExpired = sinon.stub();
   const tokenValidated = sinon.stub();
   const getToken = sinon.stub().returns(null);
+  const fetchAuthor = sinon.stub();
+  const author = 'Author';
   shallow((
     <Dashboard
       authenticated={authenticated}
@@ -21,6 +23,8 @@ test('Dashboard', (t) => {
       tokenValidated={tokenValidated}
       login={login}
       getToken={getToken}
+      fetchAuthor={fetchAuthor}
+      author={author}
     />
   ));
   t.ok(getToken.calledOnce, 'Calls getToken when mounting');
@@ -34,6 +38,8 @@ test('Dashboard', (t) => {
   const tokenExpired = sinon.stub();
   const tokenValidated = sinon.stub();
   const getToken = sinon.stub().returns('token');
+  const fetchAuthor = sinon.stub();
+  const author = 'Author';
   shallow((
     <Dashboard
       authenticated={authenticated}
@@ -41,6 +47,8 @@ test('Dashboard', (t) => {
       tokenValidated={tokenValidated}
       login={login}
       getToken={getToken}
+      fetchAuthor={fetchAuthor}
+      author={author}
     />
   ));
   t.ok(getToken.calledOnce, 'Calls getToken when mounting');
@@ -54,6 +62,8 @@ test('Dashboard', (t) => {
   const tokenExpired = sinon.stub();
   const tokenValidated = sinon.stub();
   const getToken = sinon.stub().returns(null);
+  const fetchAuthor = sinon.stub();
+  const author = 'Author';
   const wrapper = shallow((
     <Dashboard
       authenticated={authenticated}
@@ -61,6 +71,8 @@ test('Dashboard', (t) => {
       tokenValidated={tokenValidated}
       login={login}
       getToken={getToken}
+      fetchAuthor={fetchAuthor}
+      author={author}
     />
   ));
   t.equal(
@@ -76,6 +88,8 @@ test('Dashboard', (t) => {
   const tokenExpired = sinon.stub();
   const tokenValidated = sinon.stub();
   const getToken = sinon.stub().returns(null);
+  const fetchAuthor = sinon.stub();
+  const author = 'Author';
   const wrapper = shallow((
     <Dashboard
       authenticated={authenticated}
@@ -83,6 +97,8 @@ test('Dashboard', (t) => {
       tokenValidated={tokenValidated}
       login={login}
       getToken={getToken}
+      fetchAuthor={fetchAuthor}
+      author={author}
     />
   ));
   t.ok(
