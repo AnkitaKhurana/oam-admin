@@ -20,7 +20,7 @@ export function fetchAuthor() {
     type: 'CALL_API',
     payload: {
       endpoint: '',
-      authenticated: true,
+      authenticated: false,
       types: [
         'FETCH_AUTHOR',
         'FETCH_AUTHOR_SUCCEEDED',
