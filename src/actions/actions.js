@@ -2,7 +2,7 @@ export function login(formData) {
   return {
     type: 'CALL_API',
     payload: {
-      endpoint: 'createToken',
+      endpoint: '/createToken',
       authenticated: false,
       types: [
         'LOGIN',
