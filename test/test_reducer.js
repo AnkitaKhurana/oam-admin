@@ -1,5 +1,5 @@
 import test from 'tape';
-import reducer from '../src/reducers/reducer';
+import reducer from '../src/reducers/Reducer';
 
 test('reducer', (t) => {
   const state = reducer(undefined, {});
