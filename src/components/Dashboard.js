@@ -38,7 +38,7 @@ export class Dashboard extends Component {
       authenticatedContent = <LoginForm login={this.props.login} />;
     } else {
       this.props.getUsers();
-      authenticatedContent = <div><UsersList users={this.state.users} /></div>;
+      authenticatedContent = <div><UsersList users={this.state.users} /><div>Authenticated</div></div>;
     }
     return (
       <div>

@@ -16,6 +16,7 @@ test('Dashboard', (t) => {
   const getToken = sinon.stub().returns(null);
   const fetchAuthor = sinon.stub();
   const author = 'Author';
+  const getUsers = sinon.stub();
   shallow((
     <Dashboard
       authenticated={authenticated}
@@ -25,6 +26,7 @@ test('Dashboard', (t) => {
       getToken={getToken}
       fetchAuthor={fetchAuthor}
       author={author}
+      getUsers={getUsers}
     />
   ));
   t.ok(getToken.calledOnce, 'Calls getToken when mounting');
@@ -40,6 +42,7 @@ test('Dashboard', (t) => {
   const getToken = sinon.stub().returns('token');
   const fetchAuthor = sinon.stub();
   const author = 'Author';
+  const getUsers = sinon.stub();
   shallow((
     <Dashboard
       authenticated={authenticated}
@@ -49,6 +52,7 @@ test('Dashboard', (t) => {
       getToken={getToken}
       fetchAuthor={fetchAuthor}
       author={author}
+      getUsers={getUsers}
     />
   ));
   t.ok(getToken.calledOnce, 'Calls getToken when mounting');
@@ -63,7 +67,8 @@ test('Dashboard', (t) => {
   const tokenValidated = sinon.stub();
   const getToken = sinon.stub().returns(null);
   const fetchAuthor = sinon.stub();
-  const author = 'Author';
+  const author = 'Author';  
+  const getUsers = sinon.stub();
   const wrapper = shallow((
     <Dashboard
       authenticated={authenticated}
@@ -73,6 +78,8 @@ test('Dashboard', (t) => {
       getToken={getToken}
       fetchAuthor={fetchAuthor}
       author={author}
+      getUsers={getUsers}
+
     />
   ));
   t.equal(
@@ -89,7 +96,8 @@ test('Dashboard', (t) => {
   const tokenValidated = sinon.stub();
   const getToken = sinon.stub().returns(null);
   const fetchAuthor = sinon.stub();
-  const author = 'Author';
+  const author = 'Author';  
+  const getUsers = sinon.stub();
   const wrapper = shallow((
     <Dashboard
       authenticated={authenticated}
@@ -99,6 +107,8 @@ test('Dashboard', (t) => {
       getToken={getToken}
       fetchAuthor={fetchAuthor}
       author={author}
+      getUsers={getUsers}
+
     />
   ));
   t.ok(
