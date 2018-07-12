@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Title from './Title';
 import LoginForm from './LoginForm';
+import UsersList from './UsersList';
 // import LoggedIn from './LoggedIn';
 import { getToken } from '../utils/token';
-import { login, tokenExpired, tokenValidated, fetchAuthor }
+import { login, tokenExpired, tokenValidated, fetchAuthor, getUsers }
   from '../actions/actions';
 
 export class Dashboard extends Component {
@@ -13,6 +14,7 @@ export class Dashboard extends Component {
     super(props);
     this.state = {
       name_author: '',
+      users: {}
     };
   }
   componentWillMount() {
@@ -28,13 +30,15 @@ export class Dashboard extends Component {
   }
   componentWillReceiveProps(props) {
     this.setState({ name_author: props.author });
+    this.setState({ users: props.users });
   }
   render() {
     let authenticatedContent;
     if (this.props.authenticated === false) {
       authenticatedContent = <LoginForm login={this.props.login} />;
     } else {
-      authenticatedContent = <div>Authenticated</div>;
+      this.props.getUsers();
+      authenticatedContent = <div><UsersList users={this.state.users} /></div>;
     }
     return (
       <div>
@@ -56,20 +60,24 @@ Dashboard.propTypes = {
   login: PropTypes.func.isRequired,
   getToken: PropTypes.func.isRequired,
   fetchAuthor: PropTypes.func.isRequired,
-  author: PropTypes.string.isRequired
+  author: PropTypes.string.isRequired,
+  getUsers: PropTypes.func.isRequired,
+  users: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   authenticated: state.admin.authenticated,
   getToken,
-  author: state.admin.author
+  author: state.admin.author,
+  users: state.admin.users
 });
 
 const mapDispatchToProps = {
   login,
   tokenExpired,
   tokenValidated,
-  fetchAuthor
+  fetchAuthor,
+  getUsers
 };
 
 
