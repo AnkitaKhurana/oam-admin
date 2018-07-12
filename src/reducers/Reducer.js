@@ -1,6 +1,7 @@
 const initialState = {
   author: '',
-  authenticated: false
+  authenticated: false,
+  users: {}
 };
 
 export default function (state = initialState, action) {
@@ -33,6 +34,17 @@ export default function (state = initialState, action) {
       return {
         ...state,
         author: ''
+      };
+    case 'FETCH_USERS_SUCCEEDED':
+      return {
+        ...state,
+        users: action.payload.json.results
+      };
+
+    case 'FETCH_USERS_FAILED':
+      return {
+        ...state,
+        users: {}
       };
 
     default: return state;
