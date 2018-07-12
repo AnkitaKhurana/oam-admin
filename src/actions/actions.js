@@ -31,6 +31,21 @@ export function fetchAuthor() {
   };
 }
 
+export function getUsers() {
+  return {
+    type: 'CALL_API',
+    payload: {
+      endpoint: '/users',
+      authenticated: true,
+      types: [
+        'FETCH_USERS',
+        'FETCH_USERS_SUCCEEDED',
+        'FETCH_USERS_FAILED'
+      ],
+      method: 'GET'
+    }
+  };
+}
 export function tokenExpired() {
   return { type: 'TOKEN_EXPIRED' };
 }
