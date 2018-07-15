@@ -1,7 +1,7 @@
 const initialState = {
   author: '',
   authenticated: false,
-  users: {}
+  users: []
 };
 
 export default function (state = initialState, action) {
@@ -44,7 +44,7 @@ export default function (state = initialState, action) {
     case 'FETCH_USERS_FAILED':
       return {
         ...state,
-        users: {}
+        users: []
       };
 
     default: return state;

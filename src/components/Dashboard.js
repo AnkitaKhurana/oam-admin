@@ -10,13 +10,6 @@ import { login, tokenExpired, tokenValidated, fetchAuthor, getUsers }
   from '../actions/actions';
 
 export class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name_author: '',
-      users: {}
-    };
-  }
   componentWillMount() {
     const token = this.props.getToken();
     if (token) {
@@ -27,23 +20,24 @@ export class Dashboard extends Component {
   }
   componentDidMount() {
     this.props.fetchAuthor();
+    this.props.getUsers();
   }
-  componentWillReceiveProps(props) {
-    this.setState({ name_author: props.author });
-    this.setState({ users: props.users });
-  }
+
   render() {
     let authenticatedContent;
     if (this.props.authenticated === false) {
       authenticatedContent = <LoginForm login={this.props.login} />;
     } else {
-      this.props.getUsers();
-      authenticatedContent = <div><UsersList users={this.state.users} /><div>Authenticated</div></div>;
+      authenticatedContent = (
+        <div>
+          <UsersList users={this.props.users} />
+          <div>Authenticated</div>
+        </div>);
     }
     return (
       <div>
         <header className="App-header">
-          <div><Title name={this.state.name_author} /></div>
+          <div><Title name={this.props.author} /></div>
         </header>
         <br />
         {authenticatedContent}
@@ -62,7 +56,7 @@ Dashboard.propTypes = {
   fetchAuthor: PropTypes.func.isRequired,
   author: PropTypes.string.isRequired,
   getUsers: PropTypes.func.isRequired,
-  users: PropTypes.object.isRequired,
+  users: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = state => ({

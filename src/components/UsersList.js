@@ -1,27 +1,15 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
-class UsersList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { users: {} };
-  }
-  componentWillReceiveProps(props) {
-    this.setState({ users: props.users });
-  }
-  render() {
-    return (
-      <div>
-        {Object.keys(this.state.users).map(item =>
-          (<div><p>{this.state.users[item].name}</p></div>))}
-      </div>
-    );
-  }
+import React from 'react';
+
+function UsersList(props) {
+  return (
+    <div>
+      {Object.keys(props).map(item =>
+        Object.keys(props[item]).map(data =>
+        (<p key={data}>{props[item][data].name}</p>)))
+    }
+    </div>
+  );
 }
-
-
-UsersList.propTypes = {
-  users: PropTypes.object.isRequired,
-};
 
 export default UsersList;
