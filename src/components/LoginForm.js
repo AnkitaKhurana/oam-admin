@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      password: '',
-      show: ''
-
+      password: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -29,28 +32,39 @@ class LoginForm extends Component {
   render() {
     return (
       <div>
-        <p>{this.state.show}</p>
-        <form onSubmit={this.onSubmit}>
-          <div>
-            <label>Email : </label>
-            <input
-              name="email"
-              type="email"
-              onChange={this.onChange}
-              value={this.state.email}
-            />
+        <Paper elevation={2} style={{ padding: 20 }}>
+          <Typography variant="headline" gutterBottom align="center">
+       LOGIN
+          </Typography>
+          <form onSubmit={this.onSubmit}>
+            <div>
+              <label>Email : </label>
+              <TextField
+                name="email"
+                type="email"
+                onChange={this.onChange}
+                value={this.state.email}
+              />
+              <br /><br />
+              <label>Password : </label>
+              <TextField
+                name="password"
+                type="password"
+                onChange={this.onChange}
+                value={this.state.password}
+              />
+            </div>
             <br /><br />
-            <label>Password : </label>
-            <input
-              name="password"
-              type="password"
-              onChange={this.onChange}
-              value={this.state.password}
-            />
-          </div>
-          <br /><br />
-          <button type="submit" onSubmit={this.login}>Login</button>
-        </form>
+            <Button
+              variant="contained"
+              size="small"
+              color="primary"
+              type="submit"
+              onSubmit={this.login}
+            >Login
+            </Button>
+          </form>
+        </Paper>
       </div>
     );
   }

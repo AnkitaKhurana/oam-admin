@@ -1,11 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Title(props) {
   return (
     <div>
-      <h1>{props.name}</h1>
+      {props.name}
     </div>
   );
 }
 
+Title.propTypes = {
+  name: PropTypes.string.isRequired,
+};
 export default Title;
