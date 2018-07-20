@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   container: {
-    marginTop: theme.spacing.unit,
-    display: 'inline-block',
-    textAlign: 'center',
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing.unit * 3
   },
   textField: {
     marginTop: theme.spacing.unit,
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-    textAlign: 'center'
+    width: 400
   },
+  toolbar: theme.mixins.toolbar
 });
 
 class LoginForm extends Component {
@@ -47,7 +44,7 @@ class LoginForm extends Component {
     const { classes } = this.props;
     return (
       <form className={classes.container} onSubmit={this.onSubmit}>
-        <Typography variant="display1">Login</Typography>
+        <div className={classes.toolbar} />
         <TextField
           name="email"
           type="email"
@@ -85,7 +82,8 @@ LoginForm.propTypes = {
   login: PropTypes.func.isRequired,
   classes: PropTypes.shape({
     container: PropTypes.string.isRequired,
-    textField: PropTypes.string.isRequired
+    textField: PropTypes.string.isRequired,
+    toolbar: PropTypes.string.isRequired
   }).isRequired
 };
 

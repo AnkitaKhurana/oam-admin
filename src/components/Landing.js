@@ -10,16 +10,26 @@ import LogoIcon from './LogoIcon';
 import LoginForm from './LoginForm';
 import Dashboard from './Dashboard';
 import { getToken } from '../utils/token';
-import { login, tokenExpired, tokenValidated, getUsers }
+import { login, tokenExpired, tokenValidated, getUsers, activePageChanged }
   from '../actions/actions';
 
-const styles = {
+const styles = theme => ({
   logoIcon: {
     marginLeft: -12,
     marginRight: 20,
     fontSize: 40
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  root: {
+    flexGrow: 1,
+    zIndex: 1,
+    overflow: 'hidden',
+    position: 'relative',
+    display: 'flex',
   }
-};
+});
 
 export class Landing extends Component {
   componentWillMount() {
@@ -32,16 +42,30 @@ export class Landing extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      getUsers: dispatchGetUsers,
+      users,
+      activePageChanged: dispatchActivePageChanged,
+      activePage
+    } = this.props;
+
     let authenticatedContent;
     if (this.props.authenticated === false) {
       authenticatedContent = <LoginForm login={this.props.login} />;
     } else {
-      authenticatedContent = <Dashboard />;
+      authenticatedContent = (
+        <Dashboard
+          getUsers={dispatchGetUsers}
+          users={users}
+          activePageChanged={dispatchActivePageChanged}
+          activePage={activePage}
+        />
+      );
     }
     return (
-      <React.Fragment>
-        <AppBar position="static" color="default">
+      <div className={classes.root}>
+        <AppBar position="absolute" color="default" className={classes.appBar}>
           <Toolbar>
             <LogoIcon className={classes.logoIcon} />
             <Typography variant="title" color="inherit">
@@ -50,8 +74,7 @@ export class Landing extends Component {
           </Toolbar>
         </AppBar>
         {authenticatedContent}
-      </React.Fragment>
-
+      </div>
     );
   }
 }
@@ -64,6 +87,8 @@ Landing.propTypes = {
   getToken: PropTypes.func.isRequired,
   getUsers: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  activePageChanged: PropTypes.func.isRequired,
+  activePage: PropTypes.string.isRequired,
   classes: PropTypes.shape({
     logoIcon: PropTypes.string.isRequired
   }).isRequired
@@ -72,15 +97,16 @@ Landing.propTypes = {
 const mapStateToProps = state => ({
   authenticated: state.admin.authenticated,
   getToken,
-  author: state.admin.author,
-  users: state.admin.users
+  users: state.admin.users,
+  activePage: state.admin.activePage
 });
 
 const mapDispatchToProps = {
   login,
   tokenExpired,
   tokenValidated,
-  getUsers
+  getUsers,
+  activePageChanged,
 };
 
 export default compose(
