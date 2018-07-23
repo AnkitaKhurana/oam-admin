@@ -14,7 +14,8 @@
     "recompose": "^0.27.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
-    "typeface-roboto": "^0.0.54"
+    "typeface-roboto": "^0.0.54",
+    "@material-ui/icons": "^1.1.0"
   },
   "scripts": {
     "test": "BABEL_ENV=test ./node_modules/.bin/tape -r babel-register ./test/test.js",

@@ -37,6 +37,18 @@ export default function (state = initialState, action) {
         users: []
       };
 
+    case 'FETCH_AUTHOR_SUCCEEDED':
+      return {
+        ...state,
+        author: action.payload.json.meta.provided_by
+      };
+
+    case 'FETCH_AUTHOR_FAILED':
+      return {
+        ...state,
+        author: ''
+      };
+
     case 'ACTIVE_PAGE_CHANGED':
       return {
         ...state,

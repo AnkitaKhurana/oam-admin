@@ -6,6 +6,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
+import UsersIcon from '@material-ui/icons/People';
+import UsersComponent from './Users';
+
 
 const styles = theme => ({
   drawerPaper: {
@@ -18,6 +21,9 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
     minWidth: 0, // So the Typography noWrap works
+  },
+  heading: {
+    fontSize: 25,
   }
 });
 
@@ -26,14 +32,13 @@ const Users = 'Users';
 
 const Dashboard = (props) => {
   const { classes, activePageChanged, activePage } = props;
-
   let activePageContent;
   switch (activePage) {
     case PlaceHolder:
-      activePageContent = <Typography noWrap>{'PlaceHolder'}</Typography>;
+      activePageContent = <Typography className={classes.heading} variant="title" noWrap>{'PlaceHolder'}</Typography>;
       break;
     case Users:
-      activePageContent = <Typography noWrap>{'Users'}</Typography>;
+      activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>{'Users'}</Typography><UsersComponent users={props.users} /></div>;
       break;
     default:
       activePageContent = <Typography noWrap>{'PlaceHolder'}</Typography>;
@@ -65,6 +70,7 @@ const Dashboard = (props) => {
               activePageChanged(Users);
             }}
           >
+            <UsersIcon />
             <ListItemText primary={Users} />
           </ListItem>
         </List>
@@ -78,7 +84,6 @@ const Dashboard = (props) => {
 };
 
 Dashboard.propTypes = {
-  getUsers: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   activePageChanged: PropTypes.func.isRequired,
   activePage: PropTypes.string.isRequired,
