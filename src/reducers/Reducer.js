@@ -5,6 +5,14 @@ const initialState = {
   activePage: 'PlaceHolder'
 };
 
+function updateUserAfterDelete(state, action) {
+  const newArray = state.users.slice();
+  const index = newArray.findIndex(object => object._id === action.payload.json.results._id);
+  if (index !== -1) { newArray.splice(index, 1); }
+  return newArray;
+}
+
+
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'LOGIN_SUCCEEDED':
@@ -37,16 +45,15 @@ export default function (state = initialState, action) {
         users: []
       };
 
-    case 'FETCH_AUTHOR_SUCCEEDED':
+    case 'DELETE_USER_FAILED':
       return {
         ...state,
-        author: action.payload.json.meta.provided_by
       };
 
-    case 'FETCH_AUTHOR_FAILED':
+    case 'DELETE_USER_SUCCEEDED':
       return {
         ...state,
-        author: ''
+        users: updateUserAfterDelete(state, action)
       };
 
     case 'ACTIVE_PAGE_CHANGED':

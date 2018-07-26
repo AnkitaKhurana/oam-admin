@@ -15,22 +15,6 @@ export function login(formData) {
   };
 }
 
-export function fetchAuthor() {
-  return {
-    type: 'CALL_API',
-    payload: {
-      endpoint: '',
-      authenticated: false,
-      types: [
-        'FETCH_AUTHOR',
-        'FETCH_AUTHOR_SUCCEEDED',
-        'FETCH_AUTHOR_FAILED'
-      ],
-      method: 'GET'
-    }
-  };
-}
-
 export function getUsers() {
   return {
     type: 'CALL_API',
@@ -46,6 +30,23 @@ export function getUsers() {
     }
   };
 }
+
+export function deleteUser(id) {
+  return {
+    type: 'CALL_API',
+    payload: {
+      endpoint: `/users/${id}`,
+      authenticated: true,
+      types: [
+        'DELETE_USER',
+        'DELETE_USER_SUCCEEDED',
+        'DELETE_USER_FAILED'
+      ],
+      method: 'DELETE'
+    }
+  };
+}
+
 export function tokenExpired() {
   return { type: 'TOKEN_EXPIRED' };
 }

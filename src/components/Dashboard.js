@@ -7,8 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import UsersIcon from '@material-ui/icons/People';
-import UsersComponent from './Users';
-
+import Users from './Users';
 
 const styles = theme => ({
   drawerPaper: {
@@ -28,20 +27,22 @@ const styles = theme => ({
 });
 
 const PlaceHolder = 'PlaceHolder';
-const Users = 'Users';
+const UsersBar = 'Users';
 
 const Dashboard = (props) => {
-  const { classes, activePageChanged, activePage } = props;
+  const {
+    classes, activePageChanged, activePage, users, deleteUser
+  } = props;
   let activePageContent;
   switch (activePage) {
     case PlaceHolder:
-      activePageContent = <Typography className={classes.heading} variant="title" noWrap>{'PlaceHolder'}</Typography>;
+      activePageContent = <Typography className={classes.heading} variant="title" noWrap>PlaceHolder</Typography>;
       break;
-    case Users:
-      activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>{'Users'}</Typography><UsersComponent users={props.users} /></div>;
+    case UsersBar:
+      activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>Users</Typography><Users users={users} deleteUser={deleteUser} /></div>;
       break;
     default:
-      activePageContent = <Typography noWrap>{'PlaceHolder'}</Typography>;
+      activePageContent = <Typography noWrap>PlaceHolder</Typography>;
   }
 
   return (
@@ -67,11 +68,11 @@ const Dashboard = (props) => {
             button
             divider
             onClick={() => {
-              activePageChanged(Users);
+              activePageChanged(UsersBar);
             }}
           >
             <UsersIcon />
-            <ListItemText primary={Users} />
+            <ListItemText primary={UsersBar} />
           </ListItem>
         </List>
       </Drawer>
@@ -87,6 +88,7 @@ Dashboard.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   activePageChanged: PropTypes.func.isRequired,
   activePage: PropTypes.string.isRequired,
+  deleteUser: PropTypes.func.isRequired,
   classes: PropTypes.shape({
     drawerPaper: PropTypes.string.isRequired,
     toolbar: PropTypes.string.isRequired

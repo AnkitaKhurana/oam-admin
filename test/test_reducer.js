@@ -19,20 +19,3 @@ test('reducer', (t) => {
   t.false(state.authenticated, 'Authenticated is false after TOKEN_EXPIRED');
   t.end();
 });
-
-test('reducer', (t) => {
-  const author = 'author';
-  const action = {
-    type: 'FETCH_AUTHOR_SUCCEEDED',
-    payload: {
-      json: {
-        meta: {
-          provided_by: author
-        }
-      }
-    }
-  };
-  const state = reducer({}, action);
-  t.equal(state.author, author, 'Author has value after FETCH_AUTHOR_SUCCEEDED');
-  t.end();
-});
