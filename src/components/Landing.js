@@ -10,7 +10,7 @@ import LogoIcon from './LogoIcon';
 import LoginForm from './LoginForm';
 import Dashboard from './Dashboard';
 import { getToken } from '../utils/token';
-import { login, tokenExpired, tokenValidated, getUsers, activePageChanged }
+import { login, tokenExpired, tokenValidated, getUsers, deleteUser, activePageChanged }
   from '../actions/actions';
 
 const styles = theme => ({
@@ -45,17 +45,18 @@ export class Landing extends Component {
     const {
       classes,
       getUsers: dispatchGetUsers,
+      deleteUser: dispatchDeleteUser,
       users,
       activePageChanged: dispatchActivePageChanged,
       activePage
     } = this.props;
-
     let authenticatedContent;
     if (this.props.authenticated === false) {
       authenticatedContent = <LoginForm login={this.props.login} />;
     } else {
       authenticatedContent = (
         <Dashboard
+          deleteUser={dispatchDeleteUser}
           getUsers={dispatchGetUsers}
           users={users}
           activePageChanged={dispatchActivePageChanged}
@@ -86,6 +87,7 @@ Landing.propTypes = {
   login: PropTypes.func.isRequired,
   getToken: PropTypes.func.isRequired,
   getUsers: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   activePageChanged: PropTypes.func.isRequired,
   activePage: PropTypes.string.isRequired,
@@ -106,6 +108,7 @@ const mapDispatchToProps = {
   tokenExpired,
   tokenValidated,
   getUsers,
+  deleteUser,
   activePageChanged,
 };
 

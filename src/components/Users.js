@@ -4,14 +4,21 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import PersonIcon from '@material-ui/icons/Person';
+import Delete from '@material-ui/icons/Delete';
+import Open from '@material-ui/icons/OpenInNew';
+
 import { withStyles } from '@material-ui/core/styles';
 import User from './User';
 
 const styles = theme => ({
   listItem: {
-    fontHeight: 20
+    fontHeight: 20,
   },
-  toolbar: theme.mixins.toolbar
+  toolbar: theme.mixins.toolbar,
+  rightButton: {
+    flexGrow: 1,
+    textAlign: 'right',
+  }
 });
 
 class Users extends Component {
@@ -19,43 +26,57 @@ class Users extends Component {
     super(props);
     this.state = { currentuser: {} };
     this.gotoUser = this.gotoUser.bind(this);
+    this.deleteUserFunction = this.deleteUserFunction.bind(this);
+  }
+
+  deleteUserFunction(event) {
+    if (event.target.tagName === 'path') {
+      event.stopPropagation();
+      return 0;
+    }
+    event.preventDefault();
+    this.props.deleteUser(JSON.parse(event.target.dataset.currentuser)._id);
+    return 0;
   }
 
   gotoUser(event) {
+    if (event.target.tagName === 'path') {
+      event.stopPropagation();
+      return 0;
+    }
     event.preventDefault();
     this.setState({ currentuser: JSON.parse(event.target.dataset.currentuser) });
+    return 0;
   }
 
   render() {
-    const { classes } = this.props;
-    if (this.props.users !== null && this.props.users !== undefined) {
+    const { classes, users } = this.props;
+    if (users !== null && users !== undefined) {
       return (
         <React.Fragment >
           <List component="nav">
-            {this.props.users.map(item =>
-                (
-                  <div
-                    key={item._id}
-                    data-currentuser={JSON.stringify(item)}
-                    onClick={this.gotoUser}
-                  >
-                    <ListItem
-                      button
-                      data-currentuser={JSON.stringify(item)}
-                    >
-                      <PersonIcon
+            {users.map(item =>
+              (
+                <div
+                  key={item._id}
+                  data-currentuser={JSON.stringify(item)}
+                >
+                  <ListItem>
+                    <PersonIcon />
+                    <div className={classes.listItem} >
+                      {item.name}
+                    </div>
+                    <div className={classes.rightButton}>
+                      <Open data-currentuser={JSON.stringify(item)} onClick={this.gotoUser} />
+                      <Delete
                         data-currentuser={JSON.stringify(item)}
+                        onClick={this.deleteUserFunction}
                       />
-                      <div
-                        className={classes.listItem}
-                        data-currentuser={JSON.stringify(item)}
-                      >
-                        {item.name}
-                      </div>
-                    </ListItem>
-                    <Divider />
-                  </div>
-                ))
+                    </div>
+                  </ListItem>
+                  <Divider />
+                </div>
+              ))
             }
           </List>
           <User currentuser={this.state.currentuser} />
@@ -71,7 +92,8 @@ Users.propTypes = {
   classes: PropTypes.shape({
     listItem: PropTypes.string.isRequired,
     toolbar: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  deleteUser: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Users);
