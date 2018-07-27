@@ -21,6 +21,12 @@ export default function (state = initialState, action) {
         authenticated: true
       };
 
+    case 'LOGIN_FAILED':
+      return {
+        ...state,
+        authenticated: false
+      };
+
     case 'TOKEN_EXPIRED':
       return {
         ...state,

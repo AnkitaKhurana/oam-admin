@@ -16,7 +16,10 @@ const getProps = (token, isAuthenticated) => {
   const tokenValidated = sinon.stub();
   const getToken = sinon.stub().returns(token);
   const users = [];
+  const activePage = 'Page';
+  const activePageChanged = sinon.stub();
   const getUsers = sinon.stub();
+  const deleteUser = sinon.stub();
   const classes = {
     logoIcon: ''
   };
@@ -24,9 +27,12 @@ const getProps = (token, isAuthenticated) => {
     authenticated,
     login,
     tokenExpired,
+    activePage,
     tokenValidated,
+    activePageChanged,
     getToken,
     users,
+    deleteUser,
     getUsers,
     classes
   };
