@@ -38,7 +38,7 @@ test('reducer', (t) => {
     }
   };
   const state = reducer({}, action);
-  t.deepEqual(state.users, users, 'User State stores Users after FETCH_AUTHOR_SUCCEEDED');
+  t.deepEqual(state.users, users, 'User State stores Users after FETCH_USERS_SUCCEEDED');
   t.end();
 });
 
@@ -54,6 +54,6 @@ test('reducer', (t) => {
     }
   };
   const state = reducer({}, action);
-  t.notDeepEqual(state.users, users, 'User State stores Users after FETCH_AUTHOR_SUCCEEDED');
+  t.notDeepEqual(state.users, users, 'User State stores Users after FETCH_USERS_FAILED');
   t.end();
 });

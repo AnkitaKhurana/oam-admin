@@ -7,7 +7,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import UsersIcon from '@material-ui/icons/People';
+import ImagesIcon from '@material-ui/icons/Image';
 import Users from './Users';
+import Images from './Images';
+
 
 const styles = theme => ({
   drawerPaper: {
@@ -28,10 +31,11 @@ const styles = theme => ({
 
 const PlaceHolder = 'PlaceHolder';
 const UsersBar = 'Users';
+const ImagesBar = 'Images';
 
 const Dashboard = (props) => {
   const {
-    classes, activePageChanged, activePage, users, deleteUser
+    classes, activePageChanged, activePage, users, images, deleteUser
   } = props;
   let activePageContent;
   switch (activePage) {
@@ -40,6 +44,9 @@ const Dashboard = (props) => {
       break;
     case UsersBar:
       activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>Users</Typography><Users users={users} deleteUser={deleteUser} /></div>;
+      break;
+    case ImagesBar:
+      activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>Images</Typography><Images images={images} /></div>;
       break;
     default:
       activePageContent = <Typography noWrap>PlaceHolder</Typography>;
@@ -74,6 +81,16 @@ const Dashboard = (props) => {
             <UsersIcon />
             <ListItemText primary={UsersBar} />
           </ListItem>
+          <ListItem
+            button
+            divider
+            onClick={() => {
+              activePageChanged(ImagesBar);
+            }}
+          >
+            <ImagesIcon />
+            <ListItemText primary={ImagesBar} />
+          </ListItem>
         </List>
       </Drawer>
       <main className={classes.content}>
@@ -86,6 +103,7 @@ const Dashboard = (props) => {
 
 Dashboard.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  images: PropTypes.arrayOf(PropTypes.object).isRequired,
   activePageChanged: PropTypes.func.isRequired,
   activePage: PropTypes.string.isRequired,
   deleteUser: PropTypes.func.isRequired,

@@ -47,6 +47,37 @@ export function deleteUser(id) {
   };
 }
 
+export function getImages() {
+  return {
+    type: 'CALL_API',
+    payload: {
+      endpoint: '/meta',
+      authenticated: true,
+      types: [
+        'FETCH_IMAGES',
+        'FETCH_IMAGES_SUCCEEDED',
+        'FETCH_IMAGES_FAILED'
+      ],
+      method: 'GET'
+    }
+  };
+}
+
+export function getUserImages(id) {
+  return {
+    type: 'CALL_API',
+    payload: {
+      endpoint: `/meta/${id}`,
+      authenticated: true,
+      types: [
+        'FETCH_USER_IMAGES',
+        'FETCH_USER_IMAGES_SUCCEEDED',
+        'FETCH_USER_IMAGES_FAILED'
+      ],
+      method: 'GET'
+    }
+  };
+}
 export function tokenExpired() {
   return { type: 'TOKEN_EXPIRED' };
 }

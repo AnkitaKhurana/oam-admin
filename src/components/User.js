@@ -2,23 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Images from './Images';
 
 const User = (props) => {
   if (props.currentuser._id !== undefined) {
+    console.log(props.currentuser.images)
     return (
       <React.Fragment>
         <Paper elevation={1}>
           <Typography variant="headline" component="h3">
             {props.currentuser.name}
           </Typography>
-          <Typography component="p">
-            {props.currentuser._id}
-          </Typography>
         </Paper>
       </React.Fragment>
     );
   }
-  else return (<p></p>);
+  return (<p />);
 };
 
 User.propTypes = {

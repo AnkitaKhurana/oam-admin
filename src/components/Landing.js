@@ -10,7 +10,7 @@ import LogoIcon from './LogoIcon';
 import LoginForm from './LoginForm';
 import Dashboard from './Dashboard';
 import { getToken } from '../utils/token';
-import { login, tokenExpired, tokenValidated, getUsers, deleteUser, activePageChanged }
+import { login, tokenExpired, tokenValidated, getUsers, deleteUser, getImages, activePageChanged }
   from '../actions/actions';
 
 const styles = theme => ({
@@ -46,7 +46,9 @@ export class Landing extends Component {
       classes,
       getUsers: dispatchGetUsers,
       deleteUser: dispatchDeleteUser,
+      getImages: dispatchGetImages,
       users,
+      images,
       activePageChanged: dispatchActivePageChanged,
       activePage
     } = this.props;
@@ -58,7 +60,9 @@ export class Landing extends Component {
         <Dashboard
           deleteUser={dispatchDeleteUser}
           getUsers={dispatchGetUsers}
+          getImages={dispatchGetImages}
           users={users}
+          images={images}
           activePageChanged={dispatchActivePageChanged}
           activePage={activePage}
         />
@@ -88,7 +92,9 @@ Landing.propTypes = {
   getToken: PropTypes.func.isRequired,
   getUsers: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
+  getImages: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  images: PropTypes.arrayOf(PropTypes.object).isRequired,
   activePageChanged: PropTypes.func.isRequired,
   activePage: PropTypes.string.isRequired,
   classes: PropTypes.shape({
@@ -100,6 +106,7 @@ const mapStateToProps = state => ({
   authenticated: state.admin.authenticated,
   getToken,
   users: state.admin.users,
+  images: state.admin.images,
   activePage: state.admin.activePage
 });
 
@@ -109,6 +116,7 @@ const mapDispatchToProps = {
   tokenValidated,
   getUsers,
   deleteUser,
+  getImages,
   activePageChanged,
 };
 
