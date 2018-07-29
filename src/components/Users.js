@@ -46,11 +46,12 @@ class Users extends Component {
     }
     event.preventDefault();
     this.setState({ currentuser: JSON.parse(event.target.dataset.currentuser) });
+    this.props.getUserImages(JSON.parse(event.target.dataset.currentuser)._id);
     return 0;
   }
 
   render() {
-    const { classes, users } = this.props;
+    const { classes, users, currentImages } = this.props;
     if (users !== null && users !== undefined) {
       return (
         <React.Fragment >
@@ -79,7 +80,7 @@ class Users extends Component {
               ))
             }
           </List>
-          <User currentuser={this.state.currentuser} />
+          <User currentuser={this.state.currentuser} currentImages={currentImages} />
         </React.Fragment>
       );
     }
@@ -89,11 +90,13 @@ class Users extends Component {
 
 Users.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentImages: PropTypes.arrayOf(PropTypes.object).isRequired,
   classes: PropTypes.shape({
     listItem: PropTypes.string.isRequired,
     toolbar: PropTypes.string.isRequired
   }).isRequired,
-  deleteUser: PropTypes.func.isRequired
+  deleteUser: PropTypes.func.isRequired,
+  getUserImages: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Users);

@@ -35,7 +35,7 @@ const ImagesBar = 'Images';
 
 const Dashboard = (props) => {
   const {
-    classes, activePageChanged, activePage, users, images, deleteUser
+    classes, activePageChanged, activePage, users, images, deleteUser, currentImages, getUserImages
   } = props;
   let activePageContent;
   switch (activePage) {
@@ -43,7 +43,7 @@ const Dashboard = (props) => {
       activePageContent = <Typography className={classes.heading} variant="title" noWrap>PlaceHolder</Typography>;
       break;
     case UsersBar:
-      activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>Users</Typography><Users users={users} deleteUser={deleteUser} /></div>;
+      activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>Users</Typography><Users users={users} currentImages={currentImages} getUserImages={getUserImages} deleteUser={deleteUser} /></div>;
       break;
     case ImagesBar:
       activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>Images</Typography><Images images={images} /></div>;
@@ -104,6 +104,8 @@ const Dashboard = (props) => {
 Dashboard.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentImages: PropTypes.arrayOf(PropTypes.object).isRequired,
+  getUserImages: PropTypes.func.isRequired,
   activePageChanged: PropTypes.func.isRequired,
   activePage: PropTypes.string.isRequired,
   deleteUser: PropTypes.func.isRequired,

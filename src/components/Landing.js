@@ -10,7 +10,10 @@ import LogoIcon from './LogoIcon';
 import LoginForm from './LoginForm';
 import Dashboard from './Dashboard';
 import { getToken } from '../utils/token';
-import { login, tokenExpired, tokenValidated, getUsers, deleteUser, getImages, activePageChanged }
+import {
+  login, tokenExpired, tokenValidated, getUsers, deleteUser,
+  getImages, activePageChanged, getUserImages
+}
   from '../actions/actions';
 
 const styles = theme => ({
@@ -47,6 +50,8 @@ export class Landing extends Component {
       getUsers: dispatchGetUsers,
       deleteUser: dispatchDeleteUser,
       getImages: dispatchGetImages,
+      getUserImages: dispatchGetUserImages,
+      currentImages,
       users,
       images,
       activePageChanged: dispatchActivePageChanged,
@@ -61,6 +66,8 @@ export class Landing extends Component {
           deleteUser={dispatchDeleteUser}
           getUsers={dispatchGetUsers}
           getImages={dispatchGetImages}
+          getUserImages={dispatchGetUserImages}
+          currentImages={currentImages}
           users={users}
           images={images}
           activePageChanged={dispatchActivePageChanged}
@@ -93,8 +100,10 @@ Landing.propTypes = {
   getUsers: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
   getImages: PropTypes.func.isRequired,
+  getUserImages: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentImages: PropTypes.arrayOf(PropTypes.object).isRequired,
   activePageChanged: PropTypes.func.isRequired,
   activePage: PropTypes.string.isRequired,
   classes: PropTypes.shape({
@@ -107,6 +116,7 @@ const mapStateToProps = state => ({
   getToken,
   users: state.admin.users,
   images: state.admin.images,
+  currentImages: state.admin.currentImages,
   activePage: state.admin.activePage
 });
 
@@ -115,6 +125,7 @@ const mapDispatchToProps = {
   tokenExpired,
   tokenValidated,
   getUsers,
+  getUserImages,
   deleteUser,
   getImages,
   activePageChanged,

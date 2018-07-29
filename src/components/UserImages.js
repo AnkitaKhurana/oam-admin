@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import List from '@material-ui/core/List';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Image from './Image';
@@ -15,16 +14,17 @@ const styles = theme => ({
 });
 
 const Images = (props) => {
-  const { classes, images } = props;
-  if (images !== null && images !== undefined && images !==[]) {
+  const { classes, currentImages } = props;
+  if (currentImages !== null && currentImages !== undefined && currentImages !== []) {
     return (
       <React.Fragment >
-        <List component="nav">
-          <Grid className={classes.container} container spacing={24}>
-            {images.map(item =>
-              <Image key={item._id} image={item} />)}
-          </Grid>
-        </List>
+        <Grid className={classes.container} container >
+
+          {currentImages.map(imageElement =>
+              (
+                <Image key={imageElement._id} image={imageElement} />
+              ))}
+        </Grid>
       </React.Fragment>
     );
   }
@@ -32,7 +32,7 @@ const Images = (props) => {
 };
 
 Images.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentImages: PropTypes.arrayOf(PropTypes.object).isRequired,
   classes: PropTypes.shape({
   }).isRequired,
 };

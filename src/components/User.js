@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Images from './Images';
+import UserImages from './UserImages';
 
 const User = (props) => {
   if (props.currentuser._id !== undefined) {
@@ -12,6 +12,7 @@ const User = (props) => {
           <Typography variant="headline" component="h3">
             {props.currentuser.name}
           </Typography>
+          <UserImages currentImages={props.currentImages} />
         </Paper>
       </React.Fragment>
     );
@@ -20,10 +21,11 @@ const User = (props) => {
 };
 
 User.propTypes = {
+  currentImages: PropTypes.arrayOf(PropTypes.object).isRequired,
   currentuser: PropTypes.shape({
     _id: PropTypes.string,
     name: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.object)
+    images: PropTypes.arrayOf(PropTypes.string)
   }).isRequired
 };
 
