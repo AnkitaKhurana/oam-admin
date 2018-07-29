@@ -18,7 +18,7 @@ const User = (props) => {
       </React.Fragment>
     );
   }
-  else return (<p></p>);
+  return (<p />);
 };
 
 User.propTypes = {
