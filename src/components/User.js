@@ -6,7 +6,6 @@ import Images from './Images';
 
 const User = (props) => {
   if (props.currentuser._id !== undefined) {
-    console.log(props.currentuser.images)
     return (
       <React.Fragment>
         <Paper elevation={1}>
