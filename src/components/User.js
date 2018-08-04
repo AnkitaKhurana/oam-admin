@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Images from './Images';
 
 const User = (props) => {
   if (props.currentuser._id !== undefined) {
@@ -22,8 +21,7 @@ const User = (props) => {
 User.propTypes = {
   currentuser: PropTypes.shape({
     _id: PropTypes.string,
-    name: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.object)
+    name: PropTypes.string
   }).isRequired
 };
 
