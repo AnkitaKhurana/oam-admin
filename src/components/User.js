@@ -6,13 +6,11 @@ import Typography from '@material-ui/core/Typography';
 const User = (props) => {
   if (props.currentuser._id !== undefined) {
     return (
-      <React.Fragment>
-        <Paper elevation={1}>
-          <Typography variant="headline" component="h3">
-            {props.currentuser.name}
-          </Typography>
-        </Paper>
-      </React.Fragment>
+      <Paper elevation={1}>
+        <Typography variant="headline" component="h3">
+          {props.currentuser.name}
+        </Typography>
+      </Paper>
     );
   }
   return (<p />);

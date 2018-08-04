@@ -16,16 +16,14 @@ const styles = theme => ({
 
 const Images = (props) => {
   const { classes, images } = props;
-  if (images !== null && images !== undefined) {
+  if (images !== undefined) {
     return (
-      <React.Fragment >
-        <List component="nav">
-          <Grid className={classes.container} container spacing={24}>
-            {images.map(item =>
-              <Image key={item._id} image={item} />)}
-          </Grid>
-        </List>
-      </React.Fragment>
+      <List component="nav">
+        <Grid className={classes.container} container spacing={24}>
+          {images.map(image =>
+            <Image key={image._id} image={image} />)}
+        </Grid>
+      </List>
     );
   }
   return (<p>No images Found</p>);
