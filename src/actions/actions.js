@@ -67,7 +67,7 @@ export function getUserImages(id) {
   return {
     type: 'CALL_API',
     payload: {
-      endpoint: `/users/${id}`,
+      endpoint: `/meta/${id}`,
       authenticated: true,
       types: [
         'FETCH_USER_IMAGES',
@@ -90,12 +90,5 @@ export function activePageChanged(page) {
   return {
     type: 'ACTIVE_PAGE_CHANGED',
     payload: page
-  };
-}
-
-export function currentImagesCalled(id) {
-  return {
-    type: 'CURRENT_IMAGES_CALLED',
-    payload: id
   };
 }

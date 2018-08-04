@@ -3,8 +3,7 @@ const initialState = {
   authenticated: false,
   users: [],
   activePage: 'PlaceHolder',
-  images: [],
-  currentImages: [],
+  images: []
 };
 
 function updateUserAfterDelete(state, action) {
@@ -78,16 +77,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         images: []
-      };
-    case 'FETCH_USER_IMAGES_SUCCEEDED':
-      return {
-        ...state,
-        currentImages: action.payload.json.results
-      };
-    case 'FETCH_USER_IMAGES_FAILED':
-      return {
-        ...state,
-        currentImages: []
       };
     default: return state;
   }

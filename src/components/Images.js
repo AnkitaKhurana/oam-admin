@@ -16,7 +16,7 @@ const styles = theme => ({
 
 const Images = (props) => {
   const { classes, images } = props;
-  if (images !== null && images !== undefined && images !==[]) {
+  if (images !== null && images !== undefined) {
     return (
       <React.Fragment >
         <List component="nav">
