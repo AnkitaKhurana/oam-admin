@@ -26,7 +26,7 @@ const styles = theme => ({
 class Images extends Component {
   constructor(props) {
     super(props);
-    this.state = { filter: 'All' };
+    this.state = { filter: props.imageFilter };
     this.handleChange = this.handleChange.bind(this);
   }
 

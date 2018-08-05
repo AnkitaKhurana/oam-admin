@@ -4,7 +4,7 @@ const initialState = {
   users: [],
   activePage: 'PlaceHolder',
   images: [],
-  imageFilter: 'all',
+  imageFilter: '',
 };
 
 function updateUserAfterDelete(state, action) {
@@ -75,8 +75,7 @@ export default function (state = initialState, action) {
       };
     case 'IMAGE_FILTER_CALLED':
       return {
-        ...state,
-        images: action.payload.json.results
+        ...state
       };
     case 'FETCH_IMAGES_SUCCEEDED':
       return {
@@ -99,10 +98,12 @@ export default function (state = initialState, action) {
         images: []
       };
     case 'FETCH_PLATFORM_IMAGES_SUCCEEDED':
+    {
       return {
         ...state,
         images: action.payload.json.results
       };
+    }
     case 'FETCH_PLATFORM_IMAGES_FAILED':
       return {
         ...state,

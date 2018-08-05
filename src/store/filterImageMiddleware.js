@@ -1,9 +1,10 @@
 import { getUserImages, getPlatformImages, getTitleImages } from '../actions/actions';
 
 const filterImageMiddleware = store => next => (action) => {
-  const filter = (store.getState().admin.imageFilter);
-  const parameter = action.payload;
   if (action.type === 'IMAGE_FILTER_CALLED') {
+    const filter = (store.getState().admin.imageFilter);
+    const parameter = action.payload;
+
     if (filter === 'title') {
       store.dispatch(getTitleImages(parameter));
     }
