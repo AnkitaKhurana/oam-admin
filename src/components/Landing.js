@@ -10,8 +10,10 @@ import LogoIcon from './LogoIcon';
 import LoginForm from './LoginForm';
 import Dashboard from './Dashboard';
 import { getToken } from '../utils/token';
-import { login, tokenExpired, tokenValidated, getUsers, deleteUser, getImages, activePageChanged }
-  from '../actions/actions';
+import {
+  login, tokenExpired, tokenValidated, getUsers, deleteUser,
+  getImages, activePageChanged, imageFilterChanged, imageFilterCalled
+} from '../actions/actions';
 
 const styles = theme => ({
   logoIcon: {
@@ -50,7 +52,10 @@ export class Landing extends Component {
       users,
       images,
       activePageChanged: dispatchActivePageChanged,
-      activePage
+      activePage,
+      imageFilter,
+      imageFilterChanged: dispatchImageFilterChanged,
+      imageFilterCalled: dispatchImageFilterCalled
     } = this.props;
     let authenticatedContent;
     if (this.props.authenticated === false) {
@@ -65,6 +70,9 @@ export class Landing extends Component {
           images={images}
           activePageChanged={dispatchActivePageChanged}
           activePage={activePage}
+          imageFilter={imageFilter}
+          imageFilterChanged={dispatchImageFilterChanged}
+          imageFilterCalled={dispatchImageFilterCalled}
         />
       );
     }
@@ -96,7 +104,10 @@ Landing.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   activePageChanged: PropTypes.func.isRequired,
+  imageFilterCalled: PropTypes.func.isRequired,
+  imageFilterChanged: PropTypes.func.isRequired,
   activePage: PropTypes.string.isRequired,
+  imageFilter: PropTypes.string.isRequired,
   classes: PropTypes.shape({
     logoIcon: PropTypes.string.isRequired
   }).isRequired
@@ -107,7 +118,8 @@ const mapStateToProps = state => ({
   getToken,
   users: state.admin.users,
   images: state.admin.images,
-  activePage: state.admin.activePage
+  activePage: state.admin.activePage,
+  imageFilter: state.admin.imageFilter
 });
 
 const mapDispatchToProps = {
@@ -118,6 +130,8 @@ const mapDispatchToProps = {
   deleteUser,
   getImages,
   activePageChanged,
+  imageFilterChanged,
+  imageFilterCalled
 };
 
 export default compose(

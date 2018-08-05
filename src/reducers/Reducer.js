@@ -3,7 +3,8 @@ const initialState = {
   authenticated: false,
   users: [],
   activePage: 'PlaceHolder',
-  images: []
+  images: [],
+  imageFilter: 'all',
 };
 
 function updateUserAfterDelete(state, action) {
@@ -12,7 +13,6 @@ function updateUserAfterDelete(state, action) {
   if (index !== -1) { newArray.splice(index, 1); }
   return newArray;
 }
-
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -68,12 +68,52 @@ export default function (state = initialState, action) {
         ...state,
         activePage: action.payload
       };
+    case 'IMAGE_FILTER_CHANGED':
+      return {
+        ...state,
+        imageFilter: action.payload
+      };
+    case 'IMAGE_FILTER_CALLED':
+      return {
+        ...state,
+        images: action.payload.json.results
+      };
     case 'FETCH_IMAGES_SUCCEEDED':
       return {
         ...state,
         images: action.payload.json.results
       };
     case 'FETCH_IMAGES_FAILED':
+      return {
+        ...state,
+        images: []
+      };
+    case 'FETCH_USER_IMAGES_SUCCEEDED':
+      return {
+        ...state,
+        images: action.payload.json.results
+      };
+    case 'FETCH_USER_IMAGES_FAILED':
+      return {
+        ...state,
+        images: []
+      };
+    case 'FETCH_PLATFORM_IMAGES_SUCCEEDED':
+      return {
+        ...state,
+        images: action.payload.json.results
+      };
+    case 'FETCH_PLATFORM_IMAGES_FAILED':
+      return {
+        ...state,
+        images: []
+      };
+    case 'FETCH_TITLE_IMAGES_SUCCEEDED':
+      return {
+        ...state,
+        images: action.payload.json.results
+      };
+    case 'FETCH_TITLE_IMAGES_FAILED':
       return {
         ...state,
         images: []

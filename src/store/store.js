@@ -4,6 +4,7 @@ import rootReducer from '../reducers/index';
 import apiMiddleware from './apiMiddleware';
 import tokenMiddleware from './tokenMiddleware';
 import activePageMiddleware from './activePageMiddleware';
+import filterImageMiddleware from './filterImageMiddleware';
 
 const initialState = {};
 const middleware = [thunk];
@@ -14,7 +15,8 @@ const store = createStore(
     ...middleware,
     apiMiddleware,
     tokenMiddleware,
-    activePageMiddleware
+    activePageMiddleware,
+    filterImageMiddleware
   )
 );
 

@@ -78,6 +78,39 @@ export function getUserImages(id) {
     }
   };
 }
+
+export function getPlatformImages(platform) {
+  return {
+    type: 'CALL_API',
+    payload: {
+      endpoint: `/images/platform/${platform}`,
+      authenticated: true,
+      types: [
+        'FETCH_PLATFORM_IMAGES',
+        'FETCH_PLATFORM_IMAGES_SUCCEEDED',
+        'FETCH_PLATFORM_IMAGES_FAILED'
+      ],
+      method: 'GET'
+    }
+  };
+}
+
+export function getTitleImages(startAlphabet) {
+  return {
+    type: 'CALL_API',
+    payload: {
+      endpoint: `/images/alphabet/${startAlphabet}`,
+      authenticated: true,
+      types: [
+        'FETCH_TITLE_IMAGES',
+        'FETCH_TITLE_IMAGES_SUCCEEDED',
+        'FETCH_TITLE_IMAGES_FAILED'
+      ],
+      method: 'GET'
+    }
+  };
+}
+
 export function tokenExpired() {
   return { type: 'TOKEN_EXPIRED' };
 }
@@ -90,5 +123,19 @@ export function activePageChanged(page) {
   return {
     type: 'ACTIVE_PAGE_CHANGED',
     payload: page
+  };
+}
+
+export function imageFilterChanged(filter) {
+  return {
+    type: 'IMAGE_FILTER_CHANGED',
+    payload: filter
+  };
+}
+
+export function imageFilterCalled(filterBy) {
+  return {
+    type: 'IMAGE_FILTER_CALLED',
+    payload: filterBy
   };
 }

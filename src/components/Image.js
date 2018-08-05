@@ -14,7 +14,8 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    height: 230
+    height: 230,
+    margin: 10
   },
   title: {
     fontSize: 20,
