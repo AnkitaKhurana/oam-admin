@@ -33,6 +33,9 @@ class Images extends Component {
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
     this.props.imageFilterChanged(event.target.value.toString());
+    if (event.target.value.toString() === '0') {
+      this.props.getImages();
+    }
   }
 
   render() {
@@ -102,6 +105,7 @@ Images.propTypes = {
   imageFilterChanged: PropTypes.func.isRequired,
   imageFilterCalled: PropTypes.func.isRequired,
   imageFilter: PropTypes.string.isRequired,
+  getImages: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Images);

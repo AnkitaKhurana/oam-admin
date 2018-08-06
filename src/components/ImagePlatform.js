@@ -13,7 +13,6 @@ const styles = theme => ({
   },
 });
 
-
 class ImagePlatform extends Component {
   constructor(props) {
     super(props);
@@ -66,7 +65,6 @@ ImagePlatform.propTypes = {
   }).isRequired,
   imageFilterCalled: PropTypes.func.isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
-
 };
 
 export default withStyles(styles)(ImagePlatform);

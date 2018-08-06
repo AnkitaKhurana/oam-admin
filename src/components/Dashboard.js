@@ -35,7 +35,7 @@ const ImagesBar = 'Images';
 
 const Dashboard = (props) => {
   const {
-    classes, activePageChanged, activePage, users,
+    classes, activePageChanged, activePage, users, getImages,
     images, deleteUser, imageFilter, imageFilterChanged, imageFilterCalled
   } = props;
   let activePageContent;
@@ -47,7 +47,7 @@ const Dashboard = (props) => {
       activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>Users</Typography><Users users={users} deleteUser={deleteUser} /></div>;
       break;
     case ImagesBar:
-      activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>Images</Typography><Images images={images} imageFilter={imageFilter} imageFilterChanged={imageFilterChanged} imageFilterCalled={imageFilterCalled} /></div>;
+      activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>Images</Typography><Images images={images} getImages={getImages} imageFilter={imageFilter} imageFilterChanged={imageFilterChanged} imageFilterCalled={imageFilterCalled} /></div>;
       break;
     default:
       activePageContent = <Typography noWrap>PlaceHolder</Typography>;
@@ -106,6 +106,7 @@ Dashboard.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   activePageChanged: PropTypes.func.isRequired,
+  getImages: PropTypes.func.isRequired,
   activePage: PropTypes.string.isRequired,
   imageFilterChanged: PropTypes.func.isRequired,
   imageFilterCalled: PropTypes.func.isRequired,
