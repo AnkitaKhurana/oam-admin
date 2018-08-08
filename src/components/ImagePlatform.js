@@ -39,7 +39,7 @@ class ImagePlatform extends Component {
     this.props.imageFilterCalled(filterBy);
   }
   render() {
-    const { classes, images } = this.props;
+    const { classes, images, deleteImage } = this.props;
     const { value } = this.state;
     return (
       <React.Fragment>
@@ -53,7 +53,7 @@ class ImagePlatform extends Component {
           </Tabs>
         </div>
         {images.map(image =>
-          <Image key={image._id} image={image} />)}
+          <Image key={image._id} image={image} deleteImage={deleteImage} />)}
       </React.Fragment>
     );
   }
@@ -64,6 +64,7 @@ ImagePlatform.propTypes = {
   }).isRequired,
   imageFilterCalled: PropTypes.func.isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteImage: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(ImagePlatform);

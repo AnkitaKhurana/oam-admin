@@ -28,7 +28,7 @@ class ImageDate extends Component {
   }
 
   render() {
-    const { classes, images } = this.props;
+    const { classes, images, deleteImage } = this.props;
     return (
       <React.Fragment>
         <div className={classes.root}>
@@ -46,7 +46,7 @@ class ImageDate extends Component {
             />
           </form>
         </div>
-        {images.map(image => <Image key={image._id} image={image} />)}
+        {images.map(image => <Image key={image._id} image={image} deleteImage={deleteImage} />)}
       </React.Fragment>
     );
   }
@@ -57,6 +57,7 @@ ImageDate.propTypes = {
   }).isRequired,
   imageFilterCalled: PropTypes.func.isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteImage: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(ImageDate);

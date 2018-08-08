@@ -14,6 +14,13 @@ function updateUserAfterDelete(state, action) {
   return newArray;
 }
 
+function updateImageAfterDelete(state, action) {
+  const newArray = state.images.slice();
+  const index = newArray.findIndex(object => object._id === action.payload.json.results._id);
+  if (index !== -1) { newArray.splice(index, 1); }
+  return newArray;
+}
+
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'LOGIN_SUCCEEDED':
@@ -62,7 +69,16 @@ export default function (state = initialState, action) {
         ...state,
         users: updateUserAfterDelete(state, action)
       };
+    case 'DELETE_IMAGE_FAILED':
+      return {
+        ...state,
+      };
 
+    case 'DELETE_IMAGE_SUCCEEDED':
+      return {
+        ...state,
+        images: updateImageAfterDelete(state, action)
+      };
     case 'ACTIVE_PAGE_CHANGED':
       return {
         ...state,

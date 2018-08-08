@@ -35,7 +35,7 @@ const ImagesBar = 'Images';
 
 const Dashboard = (props) => {
   const {
-    classes, activePageChanged, activePage, users, getImages,
+    classes, activePageChanged, activePage, users, getImages, deleteImage,
     images, deleteUser, imageFilter, imageFilterChanged, imageFilterCalled
   } = props;
   let activePageContent;
@@ -47,7 +47,18 @@ const Dashboard = (props) => {
       activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>Users</Typography><Users users={users} deleteUser={deleteUser} /></div>;
       break;
     case ImagesBar:
-      activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>Images</Typography><Images images={images} getImages={getImages} imageFilter={imageFilter} imageFilterChanged={imageFilterChanged} imageFilterCalled={imageFilterCalled} /></div>;
+      activePageContent = (
+        <div>
+          <Typography className={classes.heading} variant="title" noWrap>Images</Typography>
+          <Images
+            images={images}
+            getImages={getImages}
+            imageFilter={imageFilter}
+            deleteImage={deleteImage}
+            imageFilterChanged={imageFilterChanged}
+            imageFilterCalled={imageFilterCalled}
+          />
+        </div>);
       break;
     default:
       activePageContent = <Typography noWrap>PlaceHolder</Typography>;
@@ -112,6 +123,7 @@ Dashboard.propTypes = {
   imageFilterCalled: PropTypes.func.isRequired,
   imageFilter: PropTypes.string.isRequired,
   deleteUser: PropTypes.func.isRequired,
+  deleteImage: PropTypes.func.isRequired,
   classes: PropTypes.shape({
     drawerPaper: PropTypes.string.isRequired,
     toolbar: PropTypes.string.isRequired

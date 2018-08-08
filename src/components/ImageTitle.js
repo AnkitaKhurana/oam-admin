@@ -42,7 +42,7 @@ class ImageTitle extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
   render() {
-    const { classes, images } = this.props;
+    const { classes, images, deleteImage } = this.props;
     const { value } = this.state;
     return (
       <React.Fragment>
@@ -69,7 +69,7 @@ class ImageTitle extends Component {
             </FormControl>
           </form>
         </div>
-        {images.map(image => <Image key={image._id} image={image} />)}
+        {images.map(image => <Image key={image._id} image={image} deleteImage={deleteImage} />)}
       </React.Fragment>
     );
   }
@@ -78,7 +78,8 @@ class ImageTitle extends Component {
 ImageTitle.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   imageFilterCalled: PropTypes.func.isRequired,
-  images: PropTypes.arrayOf(PropTypes.object).isRequired
+  images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteImage: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(ImageTitle);

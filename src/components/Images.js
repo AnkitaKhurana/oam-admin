@@ -41,7 +41,7 @@ class Images extends Component {
 
   render() {
     const {
-      classes, images, imageFilter, imageFilterCalled
+      classes, images, imageFilter, imageFilterCalled, deleteImage
     } = this.props;
     const Date = 'date';
     const Platform = 'platform';
@@ -49,18 +49,18 @@ class Images extends Component {
     const User = 'user';
     let filteredImages;
     switch (imageFilter) {
-      case 'title': filteredImages = (<ImageTitle images={images} imageFilterCalled={imageFilterCalled} />);
+      case 'title': filteredImages = (<ImageTitle images={images} imageFilterCalled={imageFilterCalled} deleteImage={deleteImage} />);
         break;
-      case 'platform': filteredImages = (<ImagePlatform images={images} imageFilterCalled={imageFilterCalled} />);
+      case 'platform': filteredImages = (<ImagePlatform images={images} imageFilterCalled={imageFilterCalled} deleteImage={deleteImage} />);
         break;
-      case 'date': filteredImages = (<ImageDate images={images} imageFilterCalled={imageFilterCalled} />);
+      case 'date': filteredImages = (<ImageDate images={images} imageFilterCalled={imageFilterCalled} deleteImage={deleteImage} />);
         break;
-      case 'user': filteredImages = (<ImageUser images={images} imageFilterCalled={imageFilterCalled} />);
+      case 'user': filteredImages = (<ImageUser images={images} imageFilterCalled={imageFilterCalled} deleteImage={deleteImage} />);
         break;
       default:
         filteredImages = (
           <React.Fragment> {images.map(image =>
-            <Image key={image._id} image={image} />)}
+            <Image key={image._id} image={image} deleteImage={deleteImage}/>)}
           </React.Fragment>);
     }
 
@@ -110,7 +110,8 @@ Images.propTypes = {
   imageFilterChanged: PropTypes.func.isRequired,
   imageFilterCalled: PropTypes.func.isRequired,
   imageFilter: PropTypes.string.isRequired,
-  getImages: PropTypes.func.isRequired
+  getImages: PropTypes.func.isRequired,
+  deleteImage: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Images);

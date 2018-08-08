@@ -31,6 +31,22 @@ export function getUsers() {
   };
 }
 
+export function deleteImage(id) {
+  return {
+    type: 'CALL_API',
+    payload: {
+      endpoint: `/image/${id}`,
+      authenticated: true,
+      types: [
+        'DELETE_IMAGE',
+        'DELETE_IMAGE_SUCCEEDED',
+        'DELETE_IMAGE_FAILED'
+      ],
+      method: 'DELETE'
+    }
+  };
+}
+
 export function deleteUser(id) {
   return {
     type: 'CALL_API',

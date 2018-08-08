@@ -44,7 +44,7 @@ class ImageUser extends Component {
     this.props.imageFilterCalled(this.state.userName);
   }
   render() {
-    const { classes, images } = this.props;
+    const { classes, images, deleteImage } = this.props;
     return (
       <React.Fragment>
         <div className={classes.root}>
@@ -68,7 +68,7 @@ class ImageUser extends Component {
             </Button>
           </form>
         </div>
-        {images.map(image => <Image key={image._id} image={image} />)}
+        {images.map(image => <Image key={image._id} image={image} deleteImage={deleteImage} />)}
       </React.Fragment>
     );
   }
@@ -77,7 +77,8 @@ class ImageUser extends Component {
 ImageUser.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   imageFilterCalled: PropTypes.func.isRequired,
-  images: PropTypes.arrayOf(PropTypes.object).isRequired
+  images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteImage: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(ImageUser);

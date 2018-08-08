@@ -11,7 +11,7 @@ import LoginForm from './LoginForm';
 import Dashboard from './Dashboard';
 import { getToken } from '../utils/token';
 import {
-  login, tokenExpired, tokenValidated, getUsers, deleteUser,
+  login, tokenExpired, tokenValidated, getUsers, deleteUser, deleteImage,
   getImages, activePageChanged, imageFilterChanged, imageFilterCalled
 } from '../actions/actions';
 
@@ -48,6 +48,7 @@ export class Landing extends Component {
       classes,
       getUsers: dispatchGetUsers,
       deleteUser: dispatchDeleteUser,
+      deleteImage: dispatchDeleteImage,
       getImages: dispatchGetImages,
       users,
       images,
@@ -63,6 +64,7 @@ export class Landing extends Component {
     } else {
       authenticatedContent = (
         <Dashboard
+          deleteImage={dispatchDeleteImage}
           deleteUser={dispatchDeleteUser}
           getUsers={dispatchGetUsers}
           getImages={dispatchGetImages}
@@ -100,6 +102,7 @@ Landing.propTypes = {
   getToken: PropTypes.func.isRequired,
   getUsers: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
+  deleteImage: PropTypes.func.isRequired,
   getImages: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -128,6 +131,7 @@ const mapDispatchToProps = {
   tokenValidated,
   getUsers,
   deleteUser,
+  deleteImage,
   getImages,
   activePageChanged,
   imageFilterChanged,
