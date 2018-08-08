@@ -20,6 +20,10 @@ const getProps = (token, isAuthenticated) => {
   const activePageChanged = sinon.stub();
   const getUsers = sinon.stub();
   const deleteUser = sinon.stub();
+  const deleteImage = sinon.stub();
+  const imageFilterCalled = sinon.stub();
+  const imageFilterChanged = sinon.stub();
+  const imageFilter = '';
   const getImages = sinon.stub();
   const currentImages = [];
   const images = [];
@@ -36,6 +40,10 @@ const getProps = (token, isAuthenticated) => {
     getToken,
     users,
     deleteUser,
+    deleteImage,
+    imageFilter,
+    imageFilterCalled,
+    imageFilterChanged,
     getImages,
     getUsers,
     classes,
