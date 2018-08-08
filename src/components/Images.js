@@ -12,6 +12,7 @@ import Image from './Image';
 import ImageTitle from './ImageTitle';
 import ImagePlatform from './ImagePlatform';
 import ImageDate from './ImageDate';
+import ImageUser from './ImageUser';
 
 const styles = theme => ({
   container: {
@@ -45,6 +46,7 @@ class Images extends Component {
     const Date = 'date';
     const Platform = 'platform';
     const Title = 'title';
+    const User = 'user';
     let filteredImages;
     switch (imageFilter) {
       case 'title': filteredImages = (<ImageTitle images={images} imageFilterCalled={imageFilterCalled} />);
@@ -52,6 +54,8 @@ class Images extends Component {
       case 'platform': filteredImages = (<ImagePlatform images={images} imageFilterCalled={imageFilterCalled} />);
         break;
       case 'date': filteredImages = (<ImageDate images={images} imageFilterCalled={imageFilterCalled} />);
+        break;
+      case 'user': filteredImages = (<ImageUser images={images} imageFilterCalled={imageFilterCalled} />);
         break;
       default:
         filteredImages = (
@@ -82,6 +86,7 @@ class Images extends Component {
                 <MenuItem value={Title}>Title</MenuItem>
                 <MenuItem value={Date}>Date</MenuItem>
                 <MenuItem value={Platform}>Platform</MenuItem>
+                <MenuItem value={User}>User</MenuItem>
               </Select>
               <FormHelperText>Filter Images By</FormHelperText>
             </FormControl>

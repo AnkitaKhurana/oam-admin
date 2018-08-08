@@ -1,4 +1,4 @@
-import { getUserImages, getPlatformImages, getTitleImages } from '../actions/actions';
+import { getUserImages, getPlatformImages, getTitleImages, getUserDate } from '../actions/actions';
 
 const filterImageMiddleware = store => next => (action) => {
   if (action.type === 'IMAGE_FILTER_CALLED') {
@@ -13,6 +13,13 @@ const filterImageMiddleware = store => next => (action) => {
     }
     if (filter === 'user') {
       store.dispatch(getUserImages(parameter));
+    }
+    if (filter === 'date') {
+      const date = parameter.split('-');
+      const day = date[2];
+      const month = date[1];
+      const year = date[0];
+      store.dispatch(getUserDate(day, month, year));
     }
   }
   return next(action);

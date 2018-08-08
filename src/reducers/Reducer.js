@@ -98,12 +98,10 @@ export default function (state = initialState, action) {
         images: []
       };
     case 'FETCH_PLATFORM_IMAGES_SUCCEEDED':
-    {
       return {
         ...state,
         images: action.payload.json.results
       };
-    }
     case 'FETCH_PLATFORM_IMAGES_FAILED':
       return {
         ...state,

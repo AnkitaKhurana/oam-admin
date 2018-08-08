@@ -7,11 +7,8 @@ import Image from './Image';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
-  },
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap'
+    backgroundColor: theme.palette.background.paper,
+    width: 'inherit'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -23,43 +20,37 @@ const styles = theme => ({
 class ImageDate extends Component {
   constructor(props) {
     super(props);
-    props.imageFilterCalled(24, 5, 2017);
+    props.imageFilterCalled('2017-05-24');
     this.handleOnChange = this.handleOnChange.bind(this);
   }
   handleOnChange(event) {
-    const date = event.target.value.split('-');
-    const day = date[2];
-    const month = [1];
-    const year = [0];
-    this.props.imageFilterCalled(day, month, year);
+    this.props.imageFilterCalled(event.target.value);
   }
 
   render() {
     const { classes, images } = this.props;
     return (
-      <div className={classes.root}>
-        <form className={classes.container} noValidate>
-          <TextField
-            id="date"
-            label="Images After"
-            type="date"
-            defaultValue="2017-05-24"
-            className={classes.textField}
-            InputLabelProps={{
+      <React.Fragment>
+        <div className={classes.root}>
+          <form noValidate>
+            <TextField
+              id="date"
+              label="Uploaded After (mm/dd/yyyy)"
+              type="date"
+              defaultValue="2017-05-24"
+              className={classes.textField}
+              InputLabelProps={{
               shrink: true
             }}
-            onChange={this.handleOnChange}
-          />
-        </form>
-        <React.Fragment>
-          {' '}
-          {images.map(image => <Image key={image._id} image={image} />)}
-        </React.Fragment>
-      </div>
+              onChange={this.handleOnChange}
+            />
+          </form>
+        </div>
+        {images.map(image => <Image key={image._id} image={image} />)}
+      </React.Fragment>
     );
   }
 }
-
 
 ImageDate.propTypes = {
   classes: PropTypes.shape({
@@ -67,6 +58,5 @@ ImageDate.propTypes = {
   imageFilterCalled: PropTypes.func.isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-
 
 export default withStyles(styles)(ImageDate);

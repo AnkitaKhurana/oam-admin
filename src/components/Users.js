@@ -54,6 +54,7 @@ class Users extends Component {
     if (users !== null && users !== undefined) {
       return (
         <React.Fragment >
+         <User currentuser={this.state.currentuser} />
           <List component="nav">
             {users.map(item =>
               (
@@ -79,7 +80,6 @@ class Users extends Component {
               ))
             }
           </List>
-          <User currentuser={this.state.currentuser} />
         </React.Fragment>
       );
     }

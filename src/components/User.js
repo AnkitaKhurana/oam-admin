@@ -4,7 +4,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-
 const styles = {
   avatar: {
     margin: 10,
@@ -27,7 +26,7 @@ const User = (props) => {
     return (
       <Paper elevation={1}>
 
-        <Typography variant="title " className={classes.name} component="h3">
+        <Typography variant="title" className={classes.name} component="h3">
           <img alt="" className={classes.avatar} src={props.currentuser.profile_pic_uri} />
           {props.currentuser.name}
         </Typography>

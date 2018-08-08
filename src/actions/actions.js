@@ -63,16 +63,32 @@ export function getImages() {
   };
 }
 
-export function getUserImages(id) {
+export function getUserImages(name) {
   return {
     type: 'CALL_API',
     payload: {
-      endpoint: `/meta/${id}`,
+      endpoint: `/images/user/${name}`,
       authenticated: true,
       types: [
         'FETCH_USER_IMAGES',
         'FETCH_USER_IMAGES_SUCCEEDED',
         'FETCH_USER_IMAGES_FAILED'
+      ],
+      method: 'GET'
+    }
+  };
+}
+
+export function getUserDate(day, month, year) {
+  return {
+    type: 'CALL_API',
+    payload: {
+      endpoint: `/images/date/${day}/${month}/${year}`,
+      authenticated: true,
+      types: [
+        'FETCH_DATE_IMAGES',
+        'FETCH_DATE_IMAGES_SUCCEEDED',
+        'FETCH_DATE_IMAGES_FAILED'
       ],
       method: 'GET'
     }

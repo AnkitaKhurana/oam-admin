@@ -11,12 +11,14 @@ import Image from './Image';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    width: 'inherit'
   },
   tabs: {
     width: 250
   }
 });
+
 let alphabets = [];
 function Initialise() {
   alphabets = [];
@@ -43,33 +45,32 @@ class ImageTitle extends Component {
     const { classes, images } = this.props;
     const { value } = this.state;
     return (
-      <div className={classes.root}>
-        <form className={classes.root} autoComplete="off">
-          <FormControl required className={classes.formControl}>
-            <InputLabel htmlFor="filter-required">Filter</InputLabel>
-            <Select
-              value={value}
-              onChange={this.handleChange}
-              name="filter"
-              inputProps={{
+      <React.Fragment>
+        <div className={classes.root}>
+          <form autoComplete="off">
+            <FormControl required className={classes.formControl}>
+              <InputLabel htmlFor="filter-required">Filter</InputLabel>
+              <Select
+                value={value}
+                onChange={this.handleChange}
+                name="filter"
+                inputProps={{
                 id: 'filter-required'
               }}
-              className={classes.selectEmpty}
-            >
-              {alphabets.map(letter => (
-                <MenuItem key={letter.charCodeAt(0)} value={letter.charCodeAt(0) - 65}>
-                  {letter}
-                </MenuItem>
+                className={classes.selectEmpty}
+              >
+                {alphabets.map(letter => (
+                  <MenuItem key={letter.charCodeAt(0)} value={letter.charCodeAt(0) - 65}>
+                    {letter}
+                  </MenuItem>
               ))}
-            </Select>
-            <FormHelperText>Select via Title Name</FormHelperText>
-          </FormControl>
-        </form>
-        <React.Fragment>
-          {' '}
-          {images.map(image => <Image key={image._id} image={image} />)}
-        </React.Fragment>
-      </div>
+              </Select>
+              <FormHelperText>Select via Title Name</FormHelperText>
+            </FormControl>
+          </form>
+        </div>
+        {images.map(image => <Image key={image._id} image={image} />)}
+      </React.Fragment>
     );
   }
 }

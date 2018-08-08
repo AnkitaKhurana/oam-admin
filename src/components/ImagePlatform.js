@@ -5,7 +5,6 @@ import Tab from '@material-ui/core/Tab';
 import { withStyles } from '@material-ui/core/styles';
 import Image from './Image';
 
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -43,19 +42,19 @@ class ImagePlatform extends Component {
     const { classes, images } = this.props;
     const { value } = this.state;
     return (
-      <div className={classes.root}>
-        <Tabs value={value} onChange={this.handleChange}>
-          <Tab label="satellite" />
-          <Tab label="aircraft" />
-          <Tab label="uav" />
-          <Tab label="balloon" />
-          <Tab label="kite" />
-        </Tabs>
-        <React.Fragment> {images.map(image =>
+      <React.Fragment>
+        <div className={classes.root}>
+          <Tabs value={value} onChange={this.handleChange}>
+            <Tab label="satellite" />
+            <Tab label="aircraft" />
+            <Tab label="uav" />
+            <Tab label="balloon" />
+            <Tab label="kite" />
+          </Tabs>
+        </div>
+        {images.map(image =>
           <Image key={image._id} image={image} />)}
-        </React.Fragment>
-
-      </div>
+      </React.Fragment>
     );
   }
 }
