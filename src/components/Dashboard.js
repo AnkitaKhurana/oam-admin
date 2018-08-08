@@ -8,8 +8,10 @@ import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import UsersIcon from '@material-ui/icons/People';
 import ImagesIcon from '@material-ui/icons/Image';
+import AdminIcon from '@material-ui/icons/Face';
 import Users from './Users';
 import Images from './Images';
+import AdminPage from './AdminPage';
 
 
 const styles = theme => ({
@@ -29,7 +31,7 @@ const styles = theme => ({
   }
 });
 
-const PlaceHolder = 'PlaceHolder';
+const Admin = 'Admin';
 const UsersBar = 'Users';
 const ImagesBar = 'Images';
 
@@ -40,8 +42,8 @@ const Dashboard = (props) => {
   } = props;
   let activePageContent;
   switch (activePage) {
-    case PlaceHolder:
-      activePageContent = <Typography className={classes.heading} variant="title" noWrap>PlaceHolder</Typography>;
+    case Admin:
+      activePageContent = <AdminPage />;
       break;
     case UsersBar:
       activePageContent = <div><Typography className={classes.heading} variant="title" noWrap>Users</Typography><Users users={users} deleteUser={deleteUser} /></div>;
@@ -61,7 +63,7 @@ const Dashboard = (props) => {
         </div>);
       break;
     default:
-      activePageContent = <Typography noWrap>PlaceHolder</Typography>;
+      activePageContent = <AdminPage />;
   }
 
   return (
@@ -78,10 +80,11 @@ const Dashboard = (props) => {
             button
             divider
             onClick={() => {
-              activePageChanged(PlaceHolder);
+              activePageChanged(Admin);
             }}
           >
-            <ListItemText primary={PlaceHolder} />
+          <AdminIcon />
+            <ListItemText primary={Admin} />
           </ListItem>
           <ListItem
             button

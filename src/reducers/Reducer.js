@@ -2,7 +2,7 @@ const initialState = {
   author: '',
   authenticated: false,
   users: [],
-  activePage: 'PlaceHolder',
+  activePage: 'Admin',
   images: [],
   imageFilter: '',
 };
