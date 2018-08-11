@@ -49,23 +49,43 @@ class Images extends Component {
     const User = 'user';
     let filteredImages;
     switch (imageFilter) {
-      case 'title': filteredImages = (<ImageTitle images={images} imageFilterCalled={imageFilterCalled} deleteImage={deleteImage} />);
+      case Title: filteredImages = (<ImageTitle
+        images={images}
+        imageFilterCalled={imageFilterCalled}
+        deleteImage={deleteImage}
+      />);
         break;
-      case 'platform': filteredImages = (<ImagePlatform images={images} imageFilterCalled={imageFilterCalled} deleteImage={deleteImage} />);
+
+      case Platform: filteredImages = (<ImagePlatform
+        images={images}
+        imageFilterCalled={imageFilterCalled}
+        deleteImage={deleteImage}
+      />);
         break;
-      case 'date': filteredImages = (<ImageDate images={images} imageFilterCalled={imageFilterCalled} deleteImage={deleteImage} />);
+
+      case Date: filteredImages = (<ImageDate
+        images={images}
+        imageFilterCalled={imageFilterCalled}
+        deleteImage={deleteImage}
+      />);
         break;
-      case 'user': filteredImages = (<ImageUser images={images} imageFilterCalled={imageFilterCalled} deleteImage={deleteImage} />);
+
+      case User: filteredImages = (<ImageUser
+        images={images}
+        imageFilterCalled={imageFilterCalled}
+        deleteImage={deleteImage}
+      />);
         break;
+
       default:
         filteredImages = (
           <React.Fragment> {images.map(image =>
-            <Image key={image._id} image={image} deleteImage={deleteImage}/>)}
+            <Image key={image._id} image={image} deleteImage={deleteImage} />)}
           </React.Fragment>);
     }
-
-    if (images !== undefined) {
-      return (
+    let ImagesScreen;
+    if (images.length !== 0) {
+      ImagesScreen = (
         <React.Fragment>
           <form className={classes.root} autoComplete="off">
 
@@ -75,9 +95,7 @@ class Images extends Component {
                 value={this.state.filter}
                 onChange={this.handleChange}
                 name="filter"
-                inputProps={{
-              id: 'filter-required',
-            }}
+                inputProps={{ id: 'filter-required' }}
                 className={classes.selectEmpty}
               >
                 <MenuItem value={0}>
@@ -98,8 +116,8 @@ class Images extends Component {
           </List>
         </React.Fragment>
       );
-    }
-    return (<p>No images Found</p>);
+    } else ImagesScreen = (<p>No images Found</p>);
+    return ImagesScreen;
   }
 }
 
