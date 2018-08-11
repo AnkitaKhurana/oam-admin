@@ -47,6 +47,12 @@ export default function (state = initialState, action) {
         authenticated: true
       };
 
+    case 'LOGOUT':
+      return {
+        ...state,
+        authenticated: false
+      };
+
     case 'FETCH_USERS_SUCCEEDED':
       return {
         ...state,

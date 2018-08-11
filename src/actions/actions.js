@@ -151,6 +151,10 @@ export function tokenValidated() {
   return { type: 'TOKEN_VALIDATED' };
 }
 
+export function logout() {
+  return { type: 'LOGOUT' };
+}
+
 export function activePageChanged(page) {
   return {
     type: 'ACTIVE_PAGE_CHANGED',

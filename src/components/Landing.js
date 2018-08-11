@@ -6,12 +6,13 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import LogoIcon from './LogoIcon';
 import LoginForm from './LoginForm';
 import Dashboard from './Dashboard';
 import { getToken } from '../utils/token';
 import {
-  login, tokenExpired, tokenValidated, getUsers, deleteUser, deleteImage,
+  login, logout, tokenExpired, tokenValidated, getUsers, deleteUser, deleteImage,
   getImages, activePageChanged, imageFilterChanged, imageFilterCalled
 } from '../actions/actions';
 
@@ -30,6 +31,9 @@ const styles = theme => ({
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
+  },
+  logoutButton: {
+    marginLeft: 'auto'
   }
 });
 
@@ -86,6 +90,7 @@ export class Landing extends Component {
             <Typography variant="title" color="inherit">
               OpenAerialMap Administration
             </Typography>
+            <Button variant="contained" color="primary" className={classes.logoutButton} onClick={() => { this.props.logout(); }} >Logout</Button>
           </Toolbar>
         </AppBar>
         {authenticatedContent}
@@ -99,6 +104,7 @@ Landing.propTypes = {
   tokenExpired: PropTypes.func.isRequired,
   tokenValidated: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
   getToken: PropTypes.func.isRequired,
   getUsers: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
@@ -127,6 +133,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   login,
+  logout,
   tokenExpired,
   tokenValidated,
   getUsers,
