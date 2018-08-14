@@ -38,7 +38,7 @@ test('apiMiddleware', (t) => {
   apiMiddleware(store)(next)(action);
   t.ok(
     next.withArgs(action).calledOnce,
-    'Immediately returns next action when not CALL_API'
+    '✓ Immediately returns next action when not CALL_API'
   );
   t.end();
 });
@@ -52,7 +52,7 @@ test('apiMiddleware', (t) => {
   apiMiddleware(store)(nextSpy)(testAction);
   t.ok(
     dispatch.withArgs(tokenExpiredAction).calledOnce,
-    'Creates tokenExpiredAction when token is null'
+    '✓ Creates tokenExpiredAction when token is null'
   );
   t.end();
 });
@@ -76,17 +76,17 @@ test('apiMiddleware', (t) => {
   const { endpoint, method, json } = testAction.payload;
   t.ok(
     callApiStub.calledWithExactly(endpoint, method, token, json),
-    'Calls the callApi function with proper arguments'
+    '✓ Calls the callApi function with proper arguments'
   );
   callApiStub().then(() => {
     t.equal(
       nextSpy.firstCall.args[0].payload.json.results, results,
-      'Calls next function with callApi response when succesful'
+      '✓ Calls next function with callApi response when succesful'
     );
     t.equal(
       nextSpy.firstCall.args[0].type,
       testAction.payload.types[1],
-      'Calls next function with success action type when succesful'
+      '✓ Calls next function with success action type when succesful'
     );
     t.end();
   });

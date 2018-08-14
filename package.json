@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^1.4.0",
     "dotenv": "^6.0.0",
     "jsonwebtoken": "^8.3.0",
     "prop-types": "^15.6.2",
@@ -10,8 +11,11 @@
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
+    "recompose": "^0.27.1",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "typeface-roboto": "^0.0.54",
+    "@material-ui/icons": "^1.1.0"
   },
   "scripts": {
     "test": "BABEL_ENV=test ./node_modules/.bin/tape -r babel-register ./test/test.js",

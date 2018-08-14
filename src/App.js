@@ -1,7 +1,8 @@
 import React from 'react';
+import 'typeface-roboto'; // eslint-disable-line
 import { Provider } from 'react-redux';
 import './App.css';
-import Dashboard from './components/Dashboard';
+import Landing from './components/Landing';
 import createStore from './store/store';
 
 const store = createStore;
@@ -9,7 +10,7 @@ const store = createStore;
 const App = () => (
   <Provider store={store}>
     <div className="App">
-      <Dashboard />
+      <Landing />
     </div>
   </Provider>
 );
